@@ -1,3 +1,4 @@
 class PropertyLog < ActiveRecord::Base
-  # attr_accessible :title, :body
+  validates :borrower, :purpose, :presence => true
+  belongs_to :property
 end

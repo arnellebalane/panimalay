@@ -1,3 +1,4 @@
 class Conversation < ActiveRecord::Base
-  # attr_accessible :title, :body
+  has_many :conversation_members, :dependent => :destroy
+  has_many :messages, :dependent => :destroy
 end

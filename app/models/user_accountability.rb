@@ -1,3 +1,5 @@
 class UserAccountability < ActiveRecord::Base
-  # attr_accessible :title, :body
+  validates :status, :presence => true
+  has_one :user
+  belongs_to :accountability
 end

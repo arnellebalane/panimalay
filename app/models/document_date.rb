@@ -1,3 +1,4 @@
 class DocumentDate < ActiveRecord::Base
-  # attr_accessible :title, :body
+  belongs_to :document
+  validates :document_date, :remarks, :presence => true
 end

@@ -1,3 +1,5 @@
 class EventComment < ActiveRecord::Base
-  # attr_accessible :title, :body
+  has_one :event
+  belongs_to :user
+  validates :content, :presence => true
 end

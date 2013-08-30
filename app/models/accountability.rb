@@ -1,3 +1,4 @@
 class Accountability < ActiveRecord::Base
-  # attr_accessible :title, :body
+  validates :name, :presence => true
+  has_many :user_accountabilities, :validate => true, :dependent => :destroy
 end

@@ -1,3 +1,4 @@
 class PropertyRemark < ActiveRecord::Base
-  # attr_accessible :title, :body
+  validates :content, :presence => true
+  belongs_to :property
 end

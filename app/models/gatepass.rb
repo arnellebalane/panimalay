@@ -1,3 +1,4 @@
 class Gatepass < ActiveRecord::Base
-  # attr_accessible :title, :body
+  validates :gatepass_date, :purpose, :presence => true
+  has_many :gatepass_users, :validate => true, :dependent => :destroy
 end

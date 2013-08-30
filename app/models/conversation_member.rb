@@ -1,3 +1,4 @@
 class ConversationMember < ActiveRecord::Base
-  # attr_accessible :title, :body
+  belongs_to :conversation, :validate => true
+  has_one :user, :validate => true
 end

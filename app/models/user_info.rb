@@ -1,3 +1,4 @@
 class UserInfo < ActiveRecord::Base
-  # attr_accessible :title, :body
+  validates :student_number, :firstname, :lastname, :presence => true
+  belongs_to :user
 end

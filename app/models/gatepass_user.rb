@@ -1,3 +1,4 @@
 class GatepassUser < ActiveRecord::Base
-  # attr_accessible :title, :body
+  has_one :gatepass
+  has_one :user
 end

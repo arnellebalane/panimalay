@@ -1,3 +1,4 @@
 class UserLog < ActiveRecord::Base
-  # attr_accessible :title, :body
+  validates :destination, :date_out, :presence => true
+  has_one :user
 end

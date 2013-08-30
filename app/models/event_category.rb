@@ -1,3 +1,4 @@
 class EventCategory < ActiveRecord::Base
-  # attr_accessible :title, :body
+  has_many :events, :validate => true, :dependent => :destroy
+  validates :name, :presence => true, :uniqueness => true
 end

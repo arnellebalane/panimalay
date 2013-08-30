@@ -1,3 +1,4 @@
 class Attendance < ActiveRecord::Base
-  # attr_accessible :title, :body
+  has_one :users
+  validates :attendance_date, :presence => true
 end

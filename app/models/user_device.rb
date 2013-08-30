@@ -1,3 +1,4 @@
 class UserDevice < ActiveRecord::Base
-  # attr_accessible :title, :body
+  has_one :user
+  has_one :device
 end
