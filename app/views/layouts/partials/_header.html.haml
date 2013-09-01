@@ -1,0 +1,13 @@
+%header#main-header
+  .wrapper
+    = link_to "Panimalay", root_path, :id => "site-logo"
+
+    %nav 
+      %ul.hlist 
+        - if !in_signin_page?
+          %li#sign-in= link_to "Sign In", "#"
+
+%nav#main-nav 
+  .wrapper.clearfix
+    - if !in_signin_page?
+      = render :partial => "sessions/partials/signin_snippet"

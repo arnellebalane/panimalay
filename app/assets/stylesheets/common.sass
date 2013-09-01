@@ -1,0 +1,73 @@
+@import "compass"
+
+p.error
+  font: normal 1.3rem "Lato"
+  color: #a83a3c
+  text-align: center
+  background: none
+  border: none
+  padding: 0
+
+.float-left
+  +float-left
+
+.float-right
+  +float-right
+
+.clearfix
+  overflow: visible
+  &:after
+    content: ""
+    display: block
+    clear: both
+
+.button
+  font: bold 1.1rem "Open Sans"
+  color: #ffffff
+  text-decoration: none
+  text-transform: uppercase
+  letter-spacing: -1px
+  background-color: #338b9b
+  border: none
+  border-radius: 3px
+  padding: 6px 10px
+  cursor: pointer
+  outline: none
+  &:hover, &:focus
+    background-color: #2599ab
+
+form.authentication-form
+  width: 300px
+  background-color: #ffffff
+  border: 4px solid #f6f5ed
+  margin: 100px auto 0 auto
+  padding: 20px
+  box-shadow: 0 0 0 1px #e4e1d8, inset 0 0 0 1px #e4e1d8
+
+  h6
+    font: bold 1.3rem "Open Sans"
+    color: #c68144
+    text-transform: uppercase
+    letter-spacing: -1px
+    margin: 0
+
+  p.error
+    margin-top: 15px
+
+  input
+    &[type="email"], &[type="password"]
+      width: 210px
+
+  a
+    display: block
+    padding-left: 72px
+
+  .field
+    margin-bottom: 5px
+    &:first-of-type
+      margin-top: 20px
+    &:last-of-type
+      margin-bottom: 0
+
+  .button
+    margin: 0 0 5px 72px

@@ -1,0 +1,17 @@
+#user-session
+  = form_for :user, :html => {:class => "authentication-form"} do |f|
+    %h6 Who are you?
+
+    / %p.error Incorrect email or password
+
+    .field
+      = f.label :email
+      = f.email_field :email, :autocomplete => "off", :spellcheck => false
+
+    .field
+      = f.label :password
+      = f.password_field :password
+
+    .field.actions
+      = f.submit "Sign In", :class => "button"
+      = link_to "Forgot your password?", "#"
