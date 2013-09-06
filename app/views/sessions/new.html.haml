@@ -4,7 +4,7 @@
 
     / %p.error Incorrect email or password
 
-    .field
+    .field.first
       = f.label :email
       = f.email_field :email, :autocomplete => "off", :spellcheck => false
 
@@ -12,6 +12,6 @@
       = f.label :password
       = f.password_field :password
 
-    .field.actions
+    .field.actions.last
       = f.submit "Sign In", :class => "button"
       = link_to "Forgot your password?", "#"
