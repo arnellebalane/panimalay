@@ -1,0 +1,24 @@
+@import "compass"
+@import "mixins"
+
+#main-nav #user-session
+  +float-right
+  display: none
+  position: relative
+  z-index: 0
+  margin: 3px 0
+  &:before
+    content: ""
+    position: absolute
+    top: -12px
+    right: 20px
+    z-index: -1
+    width: 15px
+    height: 15px
+    background-color: #f6f5ed
+    border-top: 1px solid #e4e1d8
+    border-left: 1px solid #e4e1d8
+    +transform(rotate(45deg))
+
+  input
+    margin-left: 1px
