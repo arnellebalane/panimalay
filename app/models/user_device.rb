@@ -1,4 +1,4 @@
 class UserDevice < ActiveRecord::Base
-  has_one :user
-  has_one :device
+  belongs_to :user
+  belongs_to :device
 end

@@ -1,4 +1,4 @@
 class Attendance < ActiveRecord::Base
-  has_one :users
+  belongs_to :users
   validates :attendance_date, :presence => true
 end

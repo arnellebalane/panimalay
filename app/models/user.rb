@@ -2,10 +2,10 @@ class User < ActiveRecord::Base
   validates :email, :password, :presence => true
   has_many :announcements, :validate => true, :dependent => :destroy
   has_many :attendances, :validate => true, :dependent => :destroy
-  has_many :conversation_member, :validate => true, :dependent => :destroy
-  has_many :conversation,  :through => :conversation_member , :validate => true, :dependent => :destroy
+  has_many :conversation_members, :validate => true, :dependent => :destroy
+  has_many :conversations,  :through => :conversation_member , :validate => true, :dependent => :destroy
   has_many :events, :validate => true, :dependent => :destroy
-  has_many :event_comment, :validate => true, :dependent => :destroy
+  has_many :event_comments, :validate => true, :dependent => :destroy
   has_many :gatepass_users, :validate => true, :dependent => :destroy
   has_many :messages, :validate => true, :dependent => :destroy
   has_many :message_notifications, :validate => true, :dependent => :destroy
