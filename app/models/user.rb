@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  attr_accessible :email, :password
   validates :email, :password, :presence => true
   has_many :announcements, :validate => true, :dependent => :destroy
   has_many :attendances, :validate => true, :dependent => :destroy

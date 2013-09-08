@@ -1,6 +1,8 @@
 Panimalay::Application.routes.draw do
 
   resources :sessions, :only => [:new, :create, :destroy]
+  resources :account, :only => [:index]
+  resources :board, :only => [:index]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

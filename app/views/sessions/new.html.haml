@@ -1,8 +1,8 @@
 #user-session
-  = form_for :user, :html => {:class => "authentication-form"} do |f|
+  = form_for :user, :url=>{:action=>:create}, :html => {:class => "authentication-form"} do |f|
     %h6 Who are you?
-
-    / %p.error Incorrect email or password
+    - if (flash[:error]) 
+      %p.error Incorrect email or password
 
     .field.first
       = f.label :email
