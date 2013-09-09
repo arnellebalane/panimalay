@@ -6,4 +6,8 @@ module ApplicationHelper
   def current_page?(controller)
     controller_name == controller
   end
+
+  def body_classes
+    "#{controller_name} #{action_name}"
+  end
 end
