@@ -1,0 +1,46 @@
+.wrapper.clearfix#user-account
+  = render :partial => "account/partials/sidebar_left"
+
+  %section#main-content 
+    .activity-list
+      %section#new-post 
+        %header 
+          %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
+        = form_for :post do |f|
+          .post-fields{"data-type" => "post"}
+            = f.text_area :content, :placeholder => "Write something..."
+          .post-fields{"data-type" => "photo"}
+            = f.label :photo, "Select the photo that you want to upload"
+            = f.file_field :photo
+          .actions.clearfix
+            %ul 
+              %li= link_to "Post", "#", "data-type" => "post", :class => "selected"
+              %li= link_to "Photo", "#", "data-type" => "photo"
+            = f.submit "Post", :class => "button"
+
+      %p.title Latest Posts
+      .activities
+        .activity
+          %header 
+            %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
+            = link_to "Arnelle Balane", "#"
+
+          %p Lorem ipsum dolor sit amet. Consectetur adepiscing elit. Lorem ipsum dolor sit amet. Consectetur adepiscing elit.
+
+          %footer
+            %time August 27, 2013
+            = link_to "2 Comments", "#", :class => "comment-hook"
+
+          .comments 
+            .comment.clearfix
+              %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
+              %div 
+                = link_to "Arnelle Balane", "#"
+                %p Lorem ipsum dolor sit amet
+                %time August 27, 2013
+
+            = form_for :comment, :html => {:class => "new-comment clearfix"} do |f|
+              = f.text_area :content, :placeholder => "Your comment..."
+              = f.submit "Post", :class => "button"
+
+  = render :partial => "account/partials/sidebar_right"

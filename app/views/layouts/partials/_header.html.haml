@@ -3,11 +3,18 @@
     = link_to "Panimalay", root_path, :id => "site-logo"
 
     %nav 
-      %ul.hlist 
+      %ul.clearfix
         - if !in_signin_page?
           %li#sign-in= link_to "Sign In", "#"
+        - if user_signed_in?
+          %li= link_to "Board", "#", :class => "#{"highlighted" if current_page?('board')}"
+          %li= link_to "Announcements", "#", :class => "#{"highlighted" if current_page?('announcements')}"
+          %li= link_to "Events", "#", :class => "#{"highlighted" if current_page?('events')}"
+          %li= link_to "Gallery", "#", :class => "#{"highlighted" if current_page?('gallery')}"
 
 %nav#main-nav 
   .wrapper.clearfix
-    - if !in_signin_page?
+    - if !in_signin_page? && !user_signed_in?
       = render :partial => "sessions/partials/signin_snippet"
+    - if user_signed_in?
+      = render :partial => "account/partials/navigation"

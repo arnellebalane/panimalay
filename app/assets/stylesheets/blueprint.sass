@@ -31,14 +31,16 @@ label
   font: bold 1.2rem "Lato"
   color: #626f68
 
-input
-  &[type="email"], &[type="password"]
-    width: 160px
-    font: normal 1.1rem "Open Sans"
-    color: #333333
-    border: 1px solid #bfbaae
-    margin: 0
-    padding: 6px
-    outline: none
-    &:focus
-      border-color: #89806c
+input[type="email"], input[type="password"], textarea
+  width: 160px
+  font: normal 1.1rem "Open Sans"
+  color: #333333
+  border: 1px solid #bfbaae
+  margin: 0
+  padding: 6px
+  outline: none
+  &:focus
+    border-color: #89806c
+
+textarea
+  resize: none
