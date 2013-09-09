@@ -1,6 +1,6 @@
 module ApplicationHelper
   def user_signed_in?
-    session[:user_id] == true
+    !session[:user_id].nil?
   end
 
   def current_page?(controller)
