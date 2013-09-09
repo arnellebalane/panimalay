@@ -6,7 +6,7 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
 
-  %body 
+  %body{:class => body_classes}
     #main-wrapper
       = render :partial => "layouts/partials/header"
       = yield
