@@ -6,16 +6,19 @@ class SessionsController < ApplicationController
   end
 
   def create
-  	@user = User.where("email = ? AND password = ?", params[:user][:email], params[:user][:password])
-  	if (@user.length > 0)
-  		@user.each do |user|
-  			session[:user_id] =  user.id
-  		end
-  		redirect_to board_index_path
-  	else
-  		flash[:error] = "Wrong email or password" 
-  		redirect_to new_session_path
-  	end
+    if (@user = User.where("email = ? AND password = ?", params[:user][:email], params[:user][:password])).length > 0
+      @user.each do |user|
+        session[:user_id] =  user.id
+      end
+      redirect_to board_index_path
+    elsif (@user = User.where("email = ?", params[:user][:email])).length > 0
+      flash[:error] = "Wrong password"
+      flash[:email] = params[:user][:email]
+      redirect_to new_session_path
+    else
+      flash[:error] = "Wrong email and password"
+      redirect_to new_session_path
+    end
   end
 
   def destroy
