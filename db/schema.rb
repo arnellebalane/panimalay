@@ -195,16 +195,27 @@ ActiveRecord::Schema.define(:version => 20130909162046) do
   end
 
   create_table "user_infos", :force => true do |t|
-    t.string   "student_number", :null => false
-    t.string   "firstname",      :null => false
-    t.string   "lastname",       :null => false
+    t.string   "student_number",                                                           :null => false
+    t.string   "firstname",                                                                :null => false
+    t.string   "lastname",                                                                 :null => false
+    t.string   "nickname"
     t.string   "course"
     t.date     "birthday"
     t.string   "contact_number"
     t.string   "address"
-    t.integer  "user_id",        :null => false
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.string   "fathername"
+    t.string   "mothername"
+    t.string   "elementary"
+    t.string   "secondary"
+    t.string   "college",                :default => "University of the Philippines Cebu"
+    t.string   "bracket"
+    t.integer  "year"
+    t.string   "guardianname"
+    t.string   "guardianaddress"
+    t.string   "guardiancontact_number"
+    t.integer  "user_id",                                                                  :null => false
+    t.datetime "created_at",                                                               :null => false
+    t.datetime "updated_at",                                                               :null => false
   end
 
   add_index "user_infos", ["user_id"], :name => "index_user_infos_on_user_id"

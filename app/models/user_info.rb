@@ -1,5 +1,5 @@
 class UserInfo < ActiveRecord::Base
-	attr_accessible :student_number, :firstname, :lastname, :course, :birthday, :contact_number, :address, :user_id
+	attr_accessible :student_number, :firstname, :lastname, :nickname, :course, :birthday, :contact_number, :address, :user_id, :fathername, :mothername, :elementary, :secondary, :college, :bracket, :year, :guardianname, :guardianaddress, :guardiancontact_number
   validates :student_number, :firstname, :lastname, :presence => true
   belongs_to :user
 end

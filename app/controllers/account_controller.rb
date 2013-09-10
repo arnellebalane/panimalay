@@ -5,6 +5,7 @@ class AccountController < ApplicationController
 			redirect_to new_session_path
 		end
 		@user_info = UserInfo.find(session[:user_id])
+		@user= User.find(session[:user_id]);
 	end
 
 end

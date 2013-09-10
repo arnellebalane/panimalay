@@ -3,8 +3,12 @@ module ApplicationHelper
     !session[:user_id].nil?
   end
 
-  def current_page?(controller)
-    controller_name == controller
+  def current_page?(controller, action = nil)
+    if action
+      controller_name == controller && action_name == action
+    else
+      controller_name == controller
+    end
   end
 
   def body_classes

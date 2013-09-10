@@ -4,10 +4,21 @@ class CreateUserInfos < ActiveRecord::Migration
       t.string :student_number, :null => false
       t.string :firstname, :null => false
       t.string :lastname, :null => false
+      t.string :nickname
       t.string :course
       t.date :birthday
       t.string :contact_number
       t.string :address
+      t.string :fathername
+      t.string :mothername
+      t.string :elementary
+      t.string :secondary
+      t.string :college, :default => 'University of the Philippines Cebu'
+      t.string :bracket
+      t.integer :year
+      t.string :guardianname
+      t.string :guardianaddress
+      t.string :guardiancontact_number
       t.references :user, :null => false
       t.timestamps
     end
