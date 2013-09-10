@@ -1,3 +1,16 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$(document).ready ->
+  info.initialize()
+
+info =
+  initialize: ->
+    info.currentTab()
+    $("#user-bio nav a").click (e) ->
+      e.preventDefault()
+      $("#user-bio nav a.current").removeClass("current")
+      $("#user-bio section").hide()
+      $(this).addClass("current")
+      info.currentTab()
+
+  currentTab: ->
+    current = $("#user-bio nav a.current").data("tab")
+    $("#user-bio section[data-tab='#{current}']").show()

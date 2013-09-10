@@ -1,0 +1,72 @@
+#user-bio
+  %nav.clearfix 
+    %p.title Information
+    %ul.clearfix 
+      %li= link_to "Personal", "#", "data-tab" => "personal", :class => "current"
+      %li= link_to "Academic", "#", "data-tab" => "academic"
+      %li= link_to "Contact", "#", "data-tab" => "contact"
+
+  .content
+    %section{"data-tab" => "personal"}
+      %div 
+        %label Nickname
+        %span arnellebalane
+      %div 
+        %label Birthday
+        %span December 21, 1994
+      %div 
+        %label Home Address
+        %span Tiptip, Tagbilaran City, Bohol
+      %div 
+        %label Civil Status
+        %span Single
+      %div 
+        %label Nationality
+        %span Filipino
+      %div 
+        %label Father's Name
+        %span Constancio Balane
+      %div 
+        %label Mother's Name
+        %span Ma. Flores Balane
+
+    %section{"data-tab" => "academic"} 
+      %div 
+        %label Elementary
+        %span Tiptip Elementary School
+      %div 
+        %label Secondary
+        %span Philippine Science High School - Central Visayas Campus
+      %div 
+        %label College
+        %span University of the Philippines Cebu
+      %div 
+        %label STFAP Bracket
+        %span BC
+      %div 
+        %label Student Number
+        %span 2011-37575
+      %div 
+        %label Degree Program
+        %span BS Computer Science
+      %div 
+        %label Year Level
+        %span 3
+
+    %section{"data-tab" => "contact"}
+      %div 
+        %label Email Address
+        %span arnellebalane@gmail.com
+      %div 
+        %label Mobile Number
+        %span 0949 654 7250
+      %p Person to contact in case of emercency:
+      %div 
+        %label Name
+        %span Ma. Flores Balane
+      %div 
+        %label Address
+        %span Tiptip, Tagbilaran City, Bohol
+      %div 
+        %label Mobile Number
+        %span 0919 759 6829

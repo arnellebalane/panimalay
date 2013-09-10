@@ -1,0 +1,43 @@
+@import "compass"
+@import "mixins"
+
+p.error
+  font: normal 1.3rem "Lato"
+  color: #a83a3c
+  text-align: center
+  background: none
+  border: none
+  padding: 0
+
+.float-left
+  +float-left
+
+.float-right
+  +float-right
+
+.clearfix
+  overflow: visible
+  &:after
+    content: ""
+    display: block
+    clear: both
+
+.button
+  font: bold 1.1rem "Open Sans"
+  color: #ffffff
+  text-decoration: none
+  text-transform: uppercase
+  letter-spacing: -1px
+  background-color: #338b9b
+  border: none
+  padding: 6px 10px
+  cursor: pointer
+  outline: none
+  &:hover, &:focus
+    background-color: #2599ab
+
+.title
+  font: bold 1.2rem/1 "Open Sans"
+  color: #626f68
+  text-transform: uppercase
+  letter-spacing: -1px

@@ -2,10 +2,10 @@
   = render :partial => "account/partials/sidebar_left"
 
   %section#main-content 
-    .activity-list
-      = render :partial => "board/partials/new_post_form"
+    = render :partial => "account/partials/user_bio"
 
-      %p.title Latest Posts
+    .activity-list
+      %p.title Recent Activities
       .activities
         .activity
           %header 

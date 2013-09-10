@@ -1,30 +1,76 @@
-#user-account
-  margin-top: 25px
+@import "compass"
 
-.profile-picture
-  display: inline-block
-  background-color: #ffffff
-  background-repeat: no-repeat
-  background-position: center center
-  background-size: 100% 100%
-  border-radius: 2px
+body.account
+  .body
+    margin-top: 25px
 
-#user-profile
-  padding-bottom: 13px
-  background-color: #333b37
+  #main-content
+    float: left
+    width: 514px
+    +box-sizing("border-box")
 
-  .profile-picture
-    width: 42px
-    height: 42px
-    border: 3px solid #ffffff
+  #user-bio 
+    .title
+      +float-left
+      margin: 0 20px 0 0
 
-  div
-    display: inline-block
-    vertical-align: top
-    width: 155px
-    margin-left: 10px
+    nav
+      padding: 10px 25px
 
-    h4
-      font: bold 1.5rem "Lato"
-      color: #ffffff
-      margin: 6px 0 0 0
+      ul
+        display: inline-block
+        list-style: none
+        margin: 0
+        padding: 0
+
+      li
+        +float-left
+        margin-right: 20px
+
+      a
+        display: block
+        font: normal 1.2rem/1 "Open Sans"
+        color: #626f68
+        text-transform: uppercase
+        letter-spacing: -1px
+        position: relative
+        &:hover, &:focus, &.current
+          color: #c68144 !important
+        &.current:after
+          content: ""
+          position: absolute
+          left: 50%
+          bottom: -13px
+          margin-left: -8px
+          border-bottom: 8px solid #ffffff
+          border-left: 8px solid transparent
+          border-right: 8px solid transparent
+
+    .content
+      background-color: #ffffff
+      box-shadow: 0 1px 0 #e4e1d8
+
+    section
+      display: none
+      padding: 25px
+
+      p
+        font: normal 1.3rem/1 "Open Sans"
+        color: #c68144
+        margin: 20px 0 5px 0
+
+      div
+        margin-top: 7px
+        &:first-of-type
+          margin: 0
+
+      label
+        vertical-align: top
+        font: normal 1.3rem/1 "Open Sans"
+        width: 150px
+
+      span
+        display: inline-block
+        font: normal 1.3rem/1 "Open Sans"
+        color: #333333
+        max-width: 305px
