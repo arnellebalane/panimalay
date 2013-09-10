@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130830073954) do
+ActiveRecord::Schema.define(:version => 20130909162046) do
 
   create_table "accountabilities", :force => true do |t|
     t.string   "name",        :null => false
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(:version => 20130830073954) do
     t.string   "title",      :null => false
     t.text     "content"
     t.string   "privacy"
-    t.integer  "users_id"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -143,6 +143,15 @@ ActiveRecord::Schema.define(:version => 20130830073954) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "posts", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
   create_table "properties", :force => true do |t|
     t.string   "name",                         :null => false
     t.integer  "quantity",      :default => 1
@@ -189,13 +198,16 @@ ActiveRecord::Schema.define(:version => 20130830073954) do
     t.string   "student_number", :null => false
     t.string   "firstname",      :null => false
     t.string   "lastname",       :null => false
+    t.string   "course"
     t.date     "birthday"
     t.string   "contact_number"
     t.string   "address"
-    t.integer  "users_id",       :null => false
+    t.integer  "user_id",        :null => false
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  add_index "user_infos", ["user_id"], :name => "index_user_infos_on_user_id"
 
   create_table "user_logs", :force => true do |t|
     t.string   "destination"

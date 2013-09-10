@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new 
   	if (session[:user_id])
-  		redirect_to account_index_path
+  		redirect_to board_index_path
   	end
   end
 

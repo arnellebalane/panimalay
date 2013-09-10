@@ -5,7 +5,7 @@ class CreateAnnouncements < ActiveRecord::Migration
       t.text :content
       t.string :privacy
 
-      t.references :users
+      t.references :user
       t.timestamps
     end
   end

@@ -14,5 +14,7 @@ class User < ActiveRecord::Base
   has_many :photo_comments, :validate => true, :dependent => :destroy
   has_many :user_accountabilities, :validate => true, :dependent => :destroy
   has_many :user_devices, :validate => true, :dependent => :destroy
+  has_one :user_info, :validate => true, :dependent => :destroy
   has_many :user_logs, :validate => true, :dependent => :destroy
+  has_many :posts
 end

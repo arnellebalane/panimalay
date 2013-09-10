@@ -2,8 +2,8 @@
   %section#user-profile 
     %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
     %div 
-      %h4 Arnelle Balane
-      %p BS Computer Science
+      %h4= @user_info.firstname + " " + @user_info.lastname
+      %p= @user_info.course
 
   %h3 This Month's Accountabilities
   %section 
