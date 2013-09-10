@@ -14,7 +14,7 @@
               - name = activity.user.user_info.firstname + " " + activity.user.user_info.lastname
               = link_to name, "#"
 
-            %p= activity.content
+            %p= simple_format(activity.content)
             / = image_tag "photo.gif"
 
             %footer
