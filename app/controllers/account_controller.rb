@@ -4,7 +4,7 @@ class AccountController < ApplicationController
 		if (!session[:user_id])
 			redirect_to new_session_path
 		end
-		@user = User.new
+		@user_info = UserInfo.find(session[:user_id])
 	end
 
 end

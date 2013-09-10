@@ -4,7 +4,7 @@ Panimalay::Application.routes.draw do
   resources :account, :only => [:index]
   resources :board, :only => [:index]
   # resources :users do
-    resources :posts, :only => [:show, :new, :destroy]
+    resources :posts, :only => [:show, :create, :destroy]
   # end
 
   # The priority is based upon order of creation:
