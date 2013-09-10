@@ -20,6 +20,7 @@ class CreateUserInfos < ActiveRecord::Migration
       t.string :guardianaddress
       t.string :guardiancontact_number
       t.references :user, :null => false
+      t.references :photo
       t.timestamps
     end
     add_index :user_infos, :user_id
