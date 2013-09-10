@@ -4,7 +4,9 @@ class PostsController < ApplicationController
 
   def create
   	@post = Post.new(content: params[:post][:content], user_id: session[:user_id])
-  	@post.save
+  	if not @post.save
+  		flash[:alert] = "Post is empty!"
+  	end
   	redirect_to board_index_path
   end
 

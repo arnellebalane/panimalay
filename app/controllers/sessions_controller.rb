@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_filter :require_login, :only => [:new, :create]
+
   def new 
   	if (session[:user_id])
   		redirect_to board_index_path
