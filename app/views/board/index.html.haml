@@ -12,7 +12,7 @@
             %header 
               %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
               - name = activity.user.user_info.firstname + " " + activity.user.user_info.lastname
-              = link_to name, "#"
+              = link_to name, account_path(activity.user.id)
 
             %p= simple_format(activity.content)
             / = image_tag "photo.gif"
