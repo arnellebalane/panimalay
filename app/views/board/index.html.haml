@@ -7,28 +7,30 @@
 
       %p.title Latest Posts
       .activities
-        .activity
-          %header 
-            %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
-            = link_to "Arnelle Balane", "#"
-
-          %p Lorem ipsum dolor sit amet. Consectetur adepiscing elit. Lorem ipsum dolor sit amet. Consectetur adepiscing elit.
-          / = image_tag "photo.gif"
-
-          %footer
-            %time August 27, 2013
-            = link_to "1 Comment", "#", :class => "comment-hook"
-
-          .comments 
-            .comment.clearfix
+        - @activities.each do |activity|
+          .activity
+            %header 
               %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
-              %div 
-                = link_to "Arnelle Balane", "#"
-                %p Lorem ipsum dolor sit amet
-                %time August 27, 2013
+              - name = activity.user.user_info.firstname + " " + activity.user.user_info.lastname
+              = link_to name, "#"
 
-            = form_for :comment, :html => {:class => "new-comment clearfix"} do |f|
-              = f.text_area :content, :placeholder => "Your comment..."
-              = f.submit "Post", :class => "button"
+            %p= activity.content
+            / = image_tag "photo.gif"
+
+            %footer
+              %time= activity.created_at.strftime("%B %d, %Y at %I:%M %p")
+              = link_to "1 Comment", "#", :class => "comment-hook"
+
+            .comments 
+              .comment.clearfix
+                %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
+                %div 
+                  = link_to "Arnelle Balane", "#"
+                  %p Lorem ipsum dolor sit amet
+                  %time August 27, 2013
+
+              = form_for :comment, :html => {:class => "new-comment clearfix"} do |f|
+                = f.text_area :content, :placeholder => "Your comment..."
+                = f.submit "Post", :class => "button"
 
   = render :partial => "account/partials/sidebar_right"
