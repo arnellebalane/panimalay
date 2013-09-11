@@ -214,6 +214,7 @@ ActiveRecord::Schema.define(:version => 20130909162046) do
     t.string   "guardianaddress"
     t.string   "guardiancontact_number"
     t.integer  "user_id",                                                                  :null => false
+    t.integer  "photo_id"
     t.datetime "created_at",                                                               :null => false
     t.datetime "updated_at",                                                               :null => false
   end
