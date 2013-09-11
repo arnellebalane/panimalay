@@ -1,9 +1,6 @@
 %aside.sidebar.float-left
-  %section#user-profile 
-    -if (@user_info.photo_id != nil)
-      %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
-    -else
-      %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
+  %section#user-profile     
+    %span.profile-picture{:style => "background-image: url('#{path_to_photo @profpic}')"}    
     %div 
       %h4= @user_info.firstname + " " + @user_info.lastname
       %p= @user_info.course

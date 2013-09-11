@@ -10,7 +10,7 @@
         - @activities.each do |activity|
           .activity
             %header 
-              %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
+              %span.profile-picture{:style => "background-image: url('#{path_to_photo @profpic}')"}
               - name = activity.user.user_info.firstname + " " + activity.user.user_info.lastname
               = link_to name, account_path(activity.user.id)
 

@@ -1,1 +1,1 @@
-RAILS_ROOT = File.expand_path("../../../", __FILE__)
+RAILS_ROOT = "http://localhost:3000"
