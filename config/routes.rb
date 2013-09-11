@@ -1,7 +1,7 @@
 Panimalay::Application.routes.draw do
 
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :account, :only => [:index]
+  resources :account, :only => [:index, :show]
   resources :board, :only => [:index]
   # resources :users do
     resources :posts, :only => [:show, :create, :destroy]
