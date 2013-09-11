@@ -7,28 +7,34 @@
     .activity-list
       %p.title Recent Activities
       .activities
-        .activity
-          %header 
-            %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
-            = link_to "Arnelle Balane", "#"
+        -@posts.each do |post|
+          -user = post.user
+          .activity
+            %header 
+              -if user.user_info.photo_id == nil
+                -pic = "default.jpg"
+              -else
+                -pic = Photo.find(user.user_info.photo_id).filename
+              %span.profile-picture{:style => "background-image: url('#{path_to_photo pic}')"}
+              = link_to user.user_info.firstname + " " + user.user_info.lastname, account_path(user.id)
 
-          %p Lorem ipsum dolor sit amet. Consectetur adepiscing elit. Lorem ipsum dolor sit amet. Consectetur adepiscing elit.
-          / = image_tag "photo.gif"
+            %p=post.content
+            / = image_tag "photo.gif"
 
-          %footer
-            %time August 27, 2013
-            = link_to "1 Comment", "#", :class => "comment-hook"
+            %footer
+              %time August 27, 2013
+              = link_to "1 Comment", "#", :class => "comment-hook"
 
-          .comments 
-            .comment.clearfix
-              %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
-              %div 
-                = link_to "Arnelle Balane", "#"
-                %p Lorem ipsum dolor sit amet
-                %time August 27, 2013
+            .comments 
+              .comment.clearfix
+                %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
+                %div 
+                  = link_to "Arnelle Balane", "#"
+                  %p Lorem ipsum dolor sit amet
+                  %time August 27, 2013
 
-            = form_for :comment, :html => {:class => "new-comment clearfix"} do |f|
-              = f.text_area :content, :placeholder => "Your comment..."
-              = f.submit "Post", :class => "button"
+              = form_for :comment, :html => {:class => "new-comment clearfix"} do |f|
+                = f.text_area :content, :placeholder => "Your comment..."
+                = f.submit "Post", :class => "button"
 
   = render :partial => "account/partials/sidebar_right"

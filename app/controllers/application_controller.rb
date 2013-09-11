@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   private
 
     def path_to_photo(filename)
-      RAILS_ROOT + "/public/" + filename
+      RAILS_ROOT + "/photos/" + filename
     end
 
     def require_login
