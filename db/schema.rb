@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130909162046) do
+ActiveRecord::Schema.define(:version => 20130911144530) do
 
   create_table "accountabilities", :force => true do |t|
     t.string   "name",        :null => false
@@ -37,6 +37,18 @@ ActiveRecord::Schema.define(:version => 20130909162046) do
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
   end
+
+  create_table "comments", :force => true do |t|
+    t.text     "content"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "conversation_members", :force => true do |t|
     t.integer  "users_id"
@@ -125,14 +137,6 @@ ActiveRecord::Schema.define(:version => 20130909162046) do
     t.integer  "users_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
-  end
-
-  create_table "photo_comments", :force => true do |t|
-    t.text     "content"
-    t.integer  "photos_id",  :null => false
-    t.integer  "users_id",   :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "photos", :force => true do |t|

@@ -1,6 +1,6 @@
 %section#new-post 
   %header 
-    %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
+    %span.profile-picture{:style => "background-image: url('#{path_to_photo @profpic}')"}
   = form_for @post do |f|
     .post-fields{"data-type" => "post"}
       = f.text_area :content, :placeholder => "Write something..."

@@ -10,7 +10,7 @@
         - @activities.each do |activity|
           .activity
             %header 
-              %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
+              %span.profile-picture{:style => "background-image: url('#{path_to_photo @profpic}')"}
               - name = activity.user.user_info.firstname + " " + activity.user.user_info.lastname
               = link_to name, account_path(activity.user.id)
 
@@ -19,7 +19,7 @@
 
             %footer
               %time= activity.created_at.strftime("%B %d, %Y at %I:%M %p")
-              = link_to "1 Comment", "#", :class => "comment-hook"
+              = link_to "#{activity.comments.length} Comment", "#", :class => "comment-hook"
 
             .comments 
               .comment.clearfix
@@ -29,7 +29,9 @@
                   %p Lorem ipsum dolor sit amet
                   %time August 27, 2013
 
-              = form_for :comment, :html => {:class => "new-comment clearfix"} do |f|
+              = form_for activity.comments.build, :html => {:class => "new-comment clearfix"} do |f|
+                = f.hidden_field :parent_id, :value => activity.id
+                = f.hidden_field :parent_class_name, :value => activity.class.name
                 = f.text_area :content, :placeholder => "Your comment..."
                 = f.submit "Post", :class => "button"
 

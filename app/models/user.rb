@@ -11,10 +11,10 @@ class User < ActiveRecord::Base
   has_many :messages, :validate => true, :dependent => :destroy
   has_many :message_notifications, :validate => true, :dependent => :destroy
   has_many :photos, :validate => true, :dependent => :destroy
-  has_many :photo_comments, :validate => true, :dependent => :destroy
   has_many :user_accountabilities, :validate => true, :dependent => :destroy
   has_many :user_devices, :validate => true, :dependent => :destroy
   has_one :user_info, :validate => true, :dependent => :destroy
   has_many :user_logs, :validate => true, :dependent => :destroy
   has_many :posts
+  has_many :comments, :through => :posts
 end

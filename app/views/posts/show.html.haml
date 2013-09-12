@@ -1,2 +1,29 @@
-%h1 Posts#show
-%p Find me in app/views/posts/show.html.haml
+.activity
+  %header 
+    %span.profile-picture{:style => "background-image: url('#{path_to_photo @profpic}')"}
+    - name = @user_info.firstname + " " + @user_info.lastname
+    = link_to name, account_path(@post.user.id)
+
+  %p= simple_format(@post.content)
+  / = image_tag "photo.gif"
+
+  %footer
+    %time= @post.created_at.strftime("%B %d, %Y at %I:%M %p")
+    = link_to "#{@post.comments.length} Comment", "#", :class => "comment-hook"
+
+  .comments
+    - @post.comments.each do |comment|
+      .comment.clearfix
+        %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
+        %div
+          - user = comment.user
+          - name = user.user_info.firstname + " " + user.user_info.firstname
+          = link_to name, account_path(user.id)
+          %p= comment.content
+          %time= comment.created_at.strftime("%B %d, %Y at %I:%M %p")
+
+      = form_for @post.comments.build, :html => {:class => "new-comment clearfix"} do |f|
+        = f.hidden_field :parent_id, :value => @post.id
+        = f.hidden_field :parent_class_name, :value => "Post"
+        = f.text_area :content, :placeholder => "Your comment..."
+        = f.submit "Post", :class => "button"

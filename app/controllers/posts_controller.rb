@@ -1,5 +1,12 @@
 class PostsController < ApplicationController
   def show
+    @post = Post.find(params[:id])
+    @user_info = @post.user.user_info
+    if @user_info.photo_id
+      @profpic = Photo.find(@user_info.photo_id).filename
+    else
+      @profpic = "default.jpg"
+    end
   end
 
   def create
