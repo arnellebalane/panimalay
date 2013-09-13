@@ -17,13 +17,13 @@
         %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
         %div
           - user = comment.user
-          - name = user.user_info.firstname + " " + user.user_info.firstname
+          - name = user.user_info.firstname + " " + user.user_info.lastname
           = link_to name, account_path(user.id)
           %p= comment.content
           %time= comment.created_at.strftime("%B %d, %Y at %I:%M %p")
 
-      = form_for @post.comments.build, :html => {:class => "new-comment clearfix"} do |f|
-        = f.hidden_field :parent_id, :value => @post.id
-        = f.hidden_field :parent_class_name, :value => "Post"
-        = f.text_area :content, :placeholder => "Your comment..."
-        = f.submit "Post", :class => "button"
+    = form_for @comment, :html => {:class => "new-comment clearfix"} do |f|
+      = f.hidden_field :parent_id, :value => @post.id
+      = f.hidden_field :parent_class_name, :value => "Post"
+      = f.text_area :content, :placeholder => "Your comment..."
+      = f.submit "Post", :class => "button"
