@@ -3,6 +3,7 @@ class AccountController < ApplicationController
 	def index
 		@user = User.find(session[:user_id]);
 		@user_info = @user.user_info
+		@comment = Comment.new
 		@activities = @user.posts.order("created_at DESC")
 		if @user_info.photo_id
 			@profpic = Photo.find(@user_info.photo_id).filename
@@ -14,6 +15,7 @@ class AccountController < ApplicationController
 	def show
 		@user = User.find(params[:id]);
 		@user_info = @user.user_info
+		@comment = Comment.new
 		@activities = @user.posts.order("created_at DESC")
 		if @user_info.photo_id
 			@profpic = Photo.find(@user_info.photo_id).filename
