@@ -1,0 +1,83 @@
+.wrapper.body.clearfix
+  = render :partial => "account/partials/sidebar_left"
+
+  %section#main-content
+    = form_for @user, :url => account_index_path do |f|
+      %section 
+        %h3.title Account Information
+        %div#profile-picture
+          %label Account Picture
+          .profile-picture{:style => "background-image: url('#{path_to_photo "default.jpg"}');"}
+            = file_field_tag :profile_picture, :accept => "image/*"
+          %span.button.unchanged#change-profile-picture Change
+        %div 
+          %label Email Address
+          = f.email_field :email
+        %div 
+          %label Password
+          = f.password_field :password
+        %div 
+          %label Confirm Password
+          = f.password_field :password_confirmation
+
+      = fields_for @user.user_info do |u|
+        %section 
+          %h3.title Personal Information
+          %div 
+            %label Nickname
+            = u.text_field :nickname
+          %div 
+            %label Birthday
+            = date_select :user_info, :birthday
+          %div 
+            %label Home Address
+            = u.text_field :address
+          %div 
+            %label Father's Name
+            = u.text_field :fathername
+          %div 
+            %label Mother's Name
+            = u.text_field :mothername
+        
+        %section 
+          %h3.title Academic Information
+          %div 
+            %label Elementary
+            = u.text_field :elementary
+          %div 
+            %label Secondary
+            = u.text_field :secondary
+          %div 
+            %label College
+            = u.text_field :college
+          %div 
+            %label STFAP Bracket
+            = select_tag :bracket, options_for_select("A|B|C|D|E1|E2".split("|").map {|x| [x, x]}, @user_info.bracket) 
+          %div 
+            %label Student Number
+            = u.text_field :student_number
+          %div 
+            %label Degree Program
+            = u.text_field :course
+          %div 
+            %label Year Level
+            = select_tag :year, options_for_select((1..4).to_a.map {|x| [x, x]}, @user_info.year)
+        
+        %section 
+          %h3.title Contact Information
+          %div 
+            %label Mobile Number
+            = u.text_field :contact_number
+          %p Person to contact in case of emergency
+          %div 
+            %label Name
+            = u.text_field :guardianname
+          %div 
+            %label Address
+            = u.text_field :guardianaddress
+          %div 
+            %label Contact Number
+            = u.text_field :guardiancontact_number
+
+        %footer
+          = f.submit "Save Changes", :class => "button"

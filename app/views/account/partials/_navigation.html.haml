@@ -1,8 +1,8 @@
 %ul.float-left 
-  %li= link_to "Profile", account_index_path, :class => "#{"current" if current_page?("account")}"
+  %li= link_to "Profile", account_index_path, :class => "#{"current" if current_page?("account", "index")}"
   %li= link_to "Accountabilities", "#"
   %li= link_to "Photos", "#"
 
 %ul.float-right 
-  %li= link_to "Settings", "#"
+  %li= link_to "Settings", settings_account_index_path, :class => "#{"current" if current_page?("account", "settings")}"
   %li= link_to "Sign Out", session_path(:id => session[:user_id]), :method => "delete"
