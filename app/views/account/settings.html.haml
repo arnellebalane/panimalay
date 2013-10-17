@@ -34,7 +34,7 @@
             = u.text_field :nickname
           %div 
             %label Birthday
-            = select_date @user_info.birthday, :prefix => :birthday            
+            = select_date @user_info.birthday, :prefix => :birthday, :start_year => 1990
           %div 
             %label Home Address
             = u.text_field :address
