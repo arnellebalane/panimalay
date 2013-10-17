@@ -19,15 +19,17 @@
 
             %footer
               %time= activity.created_at.strftime("%B %d, %Y at %I:%M %p")
-              = link_to "1 Comment", "#", :class => "comment-hook"
+              = link_to "#{activity.comments.length} Comments", "#", :class => "comment-hook"
 
-            .comments 
-              .comment.clearfix
-                %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
-                %div 
-                  = link_to "Arnelle Balane", "#"
-                  %p Lorem ipsum dolor sit amet
-                  %time August 27, 2013
+            .comments          
+              - activity.comments.each do |comment|     
+                .comment.clearfix                
+                  %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
+                  %div 
+                    - commentor = comment.user.user_info.firstname + " " + comment.user.user_info.lastname
+                    = link_to commentor, account_path(comment.user.id);
+                    %p Lorem ipsum dolor sit amet
+                    %time August 27, 2013
 
               = form_for :comment, :html => {:class => "new-comment clearfix"} do |f|
                 = f.text_area :content, :placeholder => "Your comment..."
