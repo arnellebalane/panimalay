@@ -19,19 +19,22 @@
 
             %footer
               %time= activity.created_at.strftime("%B %d, %Y at %I:%M %p")
-              = link_to "#{activity.comments.length} Comments", "#", :class => "comment-hook"
+              = link_to pluralize(activity.comments.length, "Comment"), "#", :class => "comment-hook"
 
-            .comments          
-              - activity.comments.each do |comment|     
-                .comment.clearfix                
+            .comments
+              - activity.comments.each do |comment|
+                .comment.clearfix
                   %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
-                  %div 
-                    - commentor = comment.user.user_info.firstname + " " + comment.user.user_info.lastname
-                    = link_to commentor, account_path(comment.user.id);
-                    %p Lorem ipsum dolor sit amet
-                    %time August 27, 2013
+                  %div
+                    - user = comment.user
+                    - name = user.user_info.firstname + " " + user.user_info.lastname
+                    = link_to name, account_path(user.id)
+                    %p= simple_format(comment.content)
+                    %time= comment.created_at.strftime("%B %d, %Y at %I:%M %p")
 
-              = form_for :comment, :html => {:class => "new-comment clearfix"} do |f|
+              = form_for @comment, :html => {:class => "new-comment clearfix"} do |f|
+                = f.hidden_field :parent_id, :value => activity.id
+                = f.hidden_field :parent_class_name, :value => activity.class.name
                 = f.text_area :content, :placeholder => "Your comment..."
                 = f.submit "Post", :class => "button"
 
