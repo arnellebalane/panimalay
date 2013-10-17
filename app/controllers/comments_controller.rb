@@ -11,12 +11,14 @@ class CommentsController < ApplicationController
 			if !@comment
 				flash[:alert] = @comment.errors.full_messages[0]
 			end
-			redirect_to post_path(@post.id)
+			redirect_to :back
+			# redirect_to post_path(@post.id)
 		elsif @name == "Photo"
 			redirect_to board_index_path
 		else
 			flash[:alert] = "An error has occured while adding the comment."
-			redirect_to board_index_path
+			redirect_to :back
+			# redirect_to board_index_path
 		end
 	end
 
