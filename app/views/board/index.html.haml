@@ -10,7 +10,10 @@
         - @activities.each do |activity|
           .activity
             %header 
-              %span.profile-picture{:style => "background-image: url('#{path_to_photo @profpic}')"}
+              - profpic = "default.jpg"
+              - if activity.user.user_info.photo_id and Photo.find(activity.user.user_info.photo_id)
+                - profpic = Photo.find(activity.user.user_info.photo_id).filename
+              %span.profile-picture{:style => "background-image: url('#{path_to_photo profpic}')"}
               - name = activity.user.user_info.firstname + " " + activity.user.user_info.lastname
               = link_to name, account_path(activity.user.id)
 
@@ -24,7 +27,10 @@
             .comments
               - activity.comments.each do |comment|
                 .comment.clearfix
-                  %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
+                  - profpic = "default.jpg"
+                  - if comment.user.user_info.photo_id and Photo.find(comment.user.user_info.photo_id)
+                    - profpic = Photo.find(comment.user.user_info.photo_id).filename
+                  %span.profile-picture{:style => "background-image: url('#{path_to_photo profpic}')"}
                   %div
                     - user = comment.user
                     - name = user.user_info.firstname + " " + user.user_info.lastname

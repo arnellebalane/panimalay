@@ -20,11 +20,13 @@
             %footer
               %time= activity.created_at.strftime("%B %d, %Y at %I:%M %p")
               = link_to pluralize(activity.comments.length, "Comment"), "#", :class => "comment-hook"
-
             .comments
               - activity.comments.each do |comment|
                 .comment.clearfix
-                  %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
+                  - profpic = "default.jpg"
+                  - if comment.user.user_info.photo_id and Photo.find(comment.user.user_info.photo_id)
+                    - profpic = Photo.find(comment.user.user_info.photo_id).filename
+                  %span.profile-picture{:style => "background-image: url('#{path_to_photo profpic}')"}
                   %div
                     - user = comment.user
                     - name = user.user_info.firstname + " " + user.user_info.lastname
