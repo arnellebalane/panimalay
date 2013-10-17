@@ -139,18 +139,10 @@ ActiveRecord::Schema.define(:version => 20130911144530) do
     t.datetime "updated_at",       :null => false
   end
 
-  create_table "photo_comments", :force => true do |t|
-    t.text     "content"
-    t.integer  "photos_id",  :null => false
-    t.integer  "users_id",   :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "photos", :force => true do |t|
     t.string   "filename"
     t.text     "caption"
-    t.integer  "users_id",   :null => false
+    t.integer  "user_id",    :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

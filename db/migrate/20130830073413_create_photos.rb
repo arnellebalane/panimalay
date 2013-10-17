@@ -3,10 +3,9 @@ class CreatePhotos < ActiveRecord::Migration
     create_table :photos do |t|
       t.string :filename
       t.text :caption
-
-      t.references :users, :null => false
+      t.references :user, :null => false
       t.timestamps
-    end
+    end    
   end
 
   def down

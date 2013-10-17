@@ -19,12 +19,12 @@ info =
 settings =
   initialize: ->
     $("#profile-picture").on "click", "#change-profile-picture.unchanged", ->
-      $("#profile_picture").click()
+      $("#user_profile_picture").click()
 
     $("#profile-picture").on "click", "#change-profile-picture.changed", ->
       settings.cancelFileLoad()
 
-    $("#profile_picture").change ->
+    $("#user_profile_picture").change ->
       settings.loadFile(this.files[0])
 
   loadFile: (file) ->
@@ -37,4 +37,4 @@ settings =
   cancelFileLoad: ->
     $("#change-profile-picture").toggleClass("changed unchanged").text("Change")
     $("#profile-picture .profile-picture div").remove()
-    $("#profile_picture").val("")
+    $("#user_profile_picture").val("")

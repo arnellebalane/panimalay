@@ -2,13 +2,13 @@
   = render :partial => "account/partials/sidebar_left"
 
   %section#main-content
-    = form_for @user, :url => account_index_path do |f|
+    = form_for @user, :url => account_index_path, :multipart => true do |f|
       %section 
         %h3.title Account Information
         %div#profile-picture
           %label Account Picture
-          .profile-picture{:style => "background-image: url('#{path_to_photo "default.jpg"}');"}
-            = file_field_tag :profile_picture, :accept => "image/*"
+          .profile-picture{:style => "background-image: url('#{path_to_photo @profpic}');"}
+            = f.file_field :profile_picture, :accept => "image/*"
           %span.button.unchanged#change-profile-picture Change
         %div 
           %label Email Address
@@ -24,11 +24,17 @@
         %section 
           %h3.title Personal Information
           %div 
+            %label Firstname
+            = u.text_field :firstname
+          %div 
+            %label Lastname
+            = u.text_field :lastname
+          %div 
             %label Nickname
             = u.text_field :nickname
           %div 
             %label Birthday
-            = date_select :user_info, :birthday
+            = select_date @user_info.birthday, :prefix => :birthday            
           %div 
             %label Home Address
             = u.text_field :address
