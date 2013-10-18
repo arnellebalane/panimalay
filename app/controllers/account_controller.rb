@@ -47,25 +47,20 @@ class AccountController < ApplicationController
   	if (params[:user][:email] != @user.email) 
   		Rails.logger.info "Nakasulod"
   		if (User.where("email = ?", params[:user][:email]).count <= 0) 
-  			@user[:email] = params[:user][:email]
-  			flash[:notice] = "Email modified!"
+  			@user[:email] = params[:user][:email]  			
   		else 
   			flash[:alert] = "Email address is already taken!"
+        redirect_to :back
   		end
   	end
   	if (params[:user][:password] != "")
 	  	if (params[:user][:password] == params[:user][:password_confirmation]) 
-	  		@user[:password] = params[:user][:password]
-	  		flash[:notice] = "Password modified!"
+	  		@user[:password] = params[:user][:password]	  		
 	  	else 
 	  		flash[:alert] = "Passwords does not match!"
+        redirect_to :back
 	  	end
-  	end
-  	if @user.save
-  		flash[:notice] = "Account modified!"
-  	else 
-  		flash[:alert] = "Errors were encounted while changing account information!"
-  	end
+  	end  	
 
   	if (params[:user][:profile_picture])
   		filetype = "." + params[:user][:profile_picture].original_filename.split('.').last
@@ -103,8 +98,8 @@ class AccountController < ApplicationController
     @user_info[:guardianname] = params[:user_info][:guardianname]
     @user_info[:guardianaddress] = params[:user_info][:guardianaddress]
     @user_info[:guardiancontact_number] = params[:user_info][:guardiancontact_number]            
-  	if @user_info.save
-  		flash[:notice] = "Personal information modified!"
+  	if @user_info.save and @user.save
+  		flash[:notice] = "Account modified!"
   	else 
   		flash[:alert] = "Errors were encounted while changing personal information!"
   	end
