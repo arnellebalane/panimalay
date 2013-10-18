@@ -50,7 +50,7 @@ class AccountController < ApplicationController
   			@user[:email] = params[:user][:email]  			
   		else 
   			flash[:alert] = "Email address is already taken!"
-        redirect_to :back
+        redirect_to :back and return
   		end
   	end
   	if (params[:user][:password] != "")
@@ -58,7 +58,7 @@ class AccountController < ApplicationController
 	  		@user[:password] = params[:user][:password]	  		
 	  	else 
 	  		flash[:alert] = "Passwords does not match!"
-        redirect_to :back
+        redirect_to :back and return
 	  	end
   	end  	
 
