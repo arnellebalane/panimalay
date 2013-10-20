@@ -1,0 +1,8 @@
+%section#new-post 
+  %header 
+    %span.profile-picture{:style => "background-image: url('#{path_to_photo @profpic}')"}
+  = form_for :announcement do |f|
+    .post-fields
+      = f.text_area :content, :placeholder => "Your announcement...", :class => "autosize"
+    .actions.clearfix
+      = f.submit "Post", :class => "button"
