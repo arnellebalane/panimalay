@@ -1,6 +1,7 @@
 $(document).ready ->
   info.initialize()
   settings.initialize()
+  flashMessages.initialize()
 
 info =
   initialize: ->
@@ -38,3 +39,12 @@ settings =
     $("#change-profile-picture").toggleClass("changed unchanged").text("Change")
     $("#profile-picture .profile-picture div").remove()
     $("#user_profile_picture").val("")
+
+flashMessages =
+  initialize: ->
+    if $("p.notification").length > 0
+      notification = $("p.notification").first()
+      notification.css({"margin-left": -(notification.outerWidth() / 2) + "px"}).addClass("shown")
+      setTimeout(->
+        notification.removeClass("shown")
+      , 2500)

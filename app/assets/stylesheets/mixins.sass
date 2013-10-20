@@ -6,3 +6,20 @@
   -o-transform: $transformation
   -ms-transform: $transformation
   transform: $transformation
+
+@mixin transition($properties, $duration, $easing)
+  -webkit-transition-property: $properties
+  -webkit-transition-duration: $duration
+  -webkit-transition-easing: $easing
+  -moz-transition-property: $properties
+  -moz-transition-duration: $duration
+  -moz-transition-easing: $easing
+  -o-transition-property: $properties
+  -o-transition-duration: $duration
+  -o-transition-easing: $easing
+  -ms-transition-property: $properties
+  -ms-transition-duration: $duration
+  -ms-transition-easing: $easing
+  transition-property: $properties
+  transition-duration: $duration
+  transition-easing: $easing

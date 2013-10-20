@@ -41,3 +41,14 @@ p.error
   color: #626f68
   text-transform: uppercase
   letter-spacing: -1px
+
+.notification
+  position: absolute
+  top: -50px
+  left: 50%
+  font: normal 1.3rem "Open Sans", "OpenSansRegular"
+  padding: 5px 10px
+  border-width: 1px
+  +transition(top, 300ms, ease)
+  &.shown
+    top: 124px
