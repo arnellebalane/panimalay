@@ -33,12 +33,6 @@ class AccountController < ApplicationController
 		else
 			@profpic = "default.jpg"
 		end
-    @activities = @user.posts.order("created_at DESC")
-    if @user_info.photo_id
-      @profpic = Photo.find(@user_info.photo_id).filename
-    else
-      @profpic = "default.jpg"
-    end
   end
 
   def update

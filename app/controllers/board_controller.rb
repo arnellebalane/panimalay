@@ -10,6 +10,6 @@ class BoardController < ApplicationController
 			@profpic = "default.jpg"
 		end
 		@post = Post.new
+		@photo = Photo.new
 	end
-
 end

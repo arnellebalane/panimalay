@@ -11,10 +11,27 @@ class PostsController < ApplicationController
   end
 
   def create
-  	@post = Post.new(content: params[:post][:content], user_id: session[:user_id])
-  	if not @post.save
-  		flash[:alert] = "Post is empty!"
-  	end
+    if (params[:post][:photo])
+      filetype = "." + params[:post][:photo].original_filename.split('.').last
+      myString = "thequickbrownfoxjumpsoverthelazydogTHEQUICKBROWNFOXJUMPSOVERTHELAZYDOG1234567890"
+      filename = "";
+      while(filename == "" or Photo.where("filename = ?", filename).count > 0)
+        filename = ""
+        20.times do 
+          filename += myString[rand(myString.length)]
+        end
+        filename += filetype
+      end
+      File.open(Rails.root.join('public', 'photos', filename), 'wb') do |file|
+        file.write(params[:post][:photo].read)
+      end
+      photo = Photo.create(filename: filename, caption: params[:post][:content], user_id: session[:user_id])
+    else
+      @post = Post.new(content: params[:post][:content], user_id: session[:user_id])
+      if not @post.save
+        flash[:alert] = "Post is empty!"
+      end
+    end
   	redirect_to board_index_path
   end
 

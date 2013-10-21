@@ -5,6 +5,7 @@ Panimalay::Application.routes.draw do
     get :settings, :on => :collection
     put :update, :on => :collection
   end
+  resources :photos, :only => [:create]
   resources :board, :only => [:index]
   # resources :users do
   resources :posts, :only => [:show, :create, :destroy]
