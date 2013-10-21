@@ -5,6 +5,8 @@ class AccountController < ApplicationController
 		@user_info = @user.user_info
 		@comment = Comment.new
 		@activities = @user.posts.order("created_at DESC")
+    @activities += @user.photos.order("created_at DESC")
+    @activities.sort_by!{|act| act.created_at}
 		if @user_info.photo_id
 			@profpic = Photo.find(@user_info.photo_id).filename
 		else
@@ -17,6 +19,8 @@ class AccountController < ApplicationController
 		@user_info = @user.user_info
 		@comment = Comment.new
 		@activities = @user.posts.order("created_at DESC")
+    @activities += @user.photos.order("created_at DESC")
+    @activities.sort_by!{|act| act.created_at}
 		if @user_info.photo_id
 			@profpic = Photo.find(@user_info.photo_id).filename
 		else
@@ -58,20 +62,25 @@ class AccountController < ApplicationController
 
   	if (params[:user][:profile_picture])
   		filetype = "." + params[:user][:profile_picture].original_filename.split('.').last
-  		myString = "thequickbrownfoxjumpsoverthelazydogTHEQUICKBROWNFOXJUMPSOVERTHELAZYDOG1234567890"
-  		filename = "";
-  		while(filename == "" or Photo.where("filename = ?", filename).count > 0)
-  			filename = ""
-  			20.times do 
-  				filename += myString[rand(myString.length)]
-  			end
-  			filename += filetype
-  		end
-  		File.open(Rails.root.join('public', 'photos', filename), 'wb') do |file|
-    		file.write(params[:user][:profile_picture].read)
-  		end
-  		profpic = Photo.create(filename: filename, caption: "", user_id: session[:user_id])
-  		@user_info[:photo_id] = profpic.id
+      if filetype == ".PNG" || filetype == ".png" || filetype == ".JPG" || filetype == ".jpg" || filetype == ".JPEG" || filetype == ".jpeg"
+    		myString = "thequickbrownfoxjumpsoverthelazydogTHEQUICKBROWNFOXJUMPSOVERTHELAZYDOG1234567890"
+    		filename = "";
+    		while(filename == "" or Photo.where("filename = ?", filename).count > 0)
+    			filename = ""
+    			20.times do 
+    				filename += myString[rand(myString.length)]
+    			end
+    			filename += filetype
+    		end
+    		File.open(Rails.root.join('public', 'photos', filename), 'wb') do |file|
+      		file.write(params[:user][:profile_picture].read)
+    		end
+    		profpic = Photo.create(filename: filename, caption: "", user_id: session[:user_id])
+    		@user_info[:photo_id] = profpic.id
+      else
+        flash[:alert] = "Invalid format for profile picture!"
+        redirect_to :back and return
+      end
   	end  
 
   	@user_info[:firstname] = params[:user_info][:firstname]

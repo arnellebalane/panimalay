@@ -1,0 +1,29 @@
+.wrapper.body.clearfix
+  = render :partial => "account/partials/sidebar_left"
+
+  %section#main-content 
+    .activity-list
+      %h6
+        Only official dormitory announcements must be posted on this page. If you want to post something else, you may post it at the
+        = link_to "board", board_index_path
+        = "."
+
+      = render :partial => "announcements/partials/new_announcement_form"
+
+      %p.title Latest Announcements
+      .activities
+        - @announcements.each do |announcement|
+          .activity
+            %header 
+              - profpic = "default.png"
+              - if announcement.user.user_info.photo_id and Photo.find(announcement.user.user_info.photo_id)
+                - profpic = Photo.find(announcement.user.user_info.photo_id).filename
+              %span.profile-picture{:style => "background-image: url('#{path_to_photo(profpic)}')"}
+              = link_to announcement.user.user_info.firstname + " " + announcement.user.user_info.lastname, account_path(announcement.user.id)
+
+            %p=simple_format(announcement.title) + simple_format(announcement.content) + simple_format(announcement.privacy)
+
+            %footer 
+              %time=announcement.created_at.strftime("%B %d, %Y")
+
+  = render :partial => "account/partials/sidebar_right"

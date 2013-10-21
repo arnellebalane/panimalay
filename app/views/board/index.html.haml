@@ -7,7 +7,7 @@
 
       %p.title Latest Posts
       .activities
-        - @activities.each do |activity|
+        - @activities.reverse.each do |activity|
           .activity
             %header 
               - profpic = "default.jpg"
@@ -16,9 +16,12 @@
               %span.profile-picture{:style => "background-image: url('#{path_to_photo profpic}')"}
               - name = activity.user.user_info.firstname + " " + activity.user.user_info.lastname
               = link_to name, account_path(activity.user.id)
-
-            %p= simple_format(activity.content)
-            / = image_tag "photo.gif"
+            
+            - if activity.class.name == "Post"
+              %p= simple_format(activity.content)
+            - else 
+              %p= simple_format(activity.caption)
+              = image_tag "#{path_to_photo activity.filename}"                      
 
             %footer
               %time= activity.created_at.strftime("%B %d, %Y at %I:%M %p")

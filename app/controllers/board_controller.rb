@@ -3,6 +3,8 @@ class BoardController < ApplicationController
 	def index
 		@user_info = UserInfo.find(session[:user_id])
 		@activities = Post.order("created_at DESC")
+		@activities += Photo.order("created_at DESC")
+		@activities.sort_by!{|act| act.created_at}
 		@comment = Comment.new
 		if @user_info.photo_id
 			@profpic = Photo.find(@user_info.photo_id).filename

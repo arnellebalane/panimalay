@@ -7,6 +7,10 @@
     = csrf_meta_tags
 
   %body{:class => body_classes}
+    - if alert
+      %p.notification.alert= alert
+    - if notice
+      %p.notification.notice= notice
     #main-wrapper
       = render :partial => "layouts/partials/header"
       = yield

@@ -3,7 +3,7 @@
     %span.profile-picture{:style => "background-image: url('#{path_to_photo @profpic}')"}
   = form_for @post do |f|
     .post-fields{"data-type" => "post"}
-      = f.text_area :content, :placeholder => "Write something..."
+      = f.text_area :content, :placeholder => "Write something...", :class => "autosize"
     .post-fields{"data-type" => "photo"}
       = f.label :photo, "Select the photo that you want to upload"
       = f.file_field :photo
