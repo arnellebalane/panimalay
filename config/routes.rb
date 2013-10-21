@@ -10,7 +10,7 @@ Panimalay::Application.routes.draw do
   resources :posts, :only => [:show, :create, :destroy]
   resources :comments, :only => [:create, :destroy]
   # end
-  resources :announcements, :only => [:index]
+  resources :announcements, :only => [:index, :create]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

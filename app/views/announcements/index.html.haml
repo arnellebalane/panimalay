@@ -12,15 +12,18 @@
 
       %p.title Latest Announcements
       .activities
-        - 3.times do |announcement|
+        - @announcements.each do |announcement|
           .activity
             %header 
-              %span.profile-picture{:style => "background-image: url('#{path_to_photo("default.jpg")}')"}
-              = link_to "Arnelle Balane", "#"
+              - profpic = "default.png"
+              - if announcement.user.user_info.photo_id and Photo.find(announcement.user.user_info.photo_id)
+                - profpic = Photo.find(announcement.user.user_info.photo_id).filename
+              %span.profile-picture{:style => "background-image: url('#{path_to_photo(profpic)}')"}
+              = link_to announcement.user.user_info.firstname + " " + announcement.user.user_info.lastname, account_path(announcement.user.id)
 
-            %p Lorem ipsum In est cupidatat cupidatat anim dolore anim ad do dolor consequat in ea nostrud in occaecat labore irure proident commodo nisi sed mollit proident qui in ut sint Excepteur laborum veniam deserunt dolore in eu cillum anim eiusmod dolore reprehenderit aliqua et ex deserunt occaecat velit consequat aliquip aute ea incididunt proident ut commodo laboris ut ex laborum aliqua exercitation laboris reprehenderit in minim veniam commodo eu nostrud in magna minim in dolore amet sunt qui do sint exercitation aliqua pariatur et nostrud est consequat reprehenderit veniam elit ex eiusmod tempor Excepteur dolor deserunt incididunt reprehenderit magna dolore occaecat consectetur sunt officia exercitation magna aute laborum voluptate dolore exercitation mollit aliqua officia pariatur non laborum in sint officia cupidatat in incididunt et voluptate Excepteur sed est eiusmod in labore eiusmod ea in officia dolore laboris mollit sed Duis ad et cupidatat cupidatat voluptate dolore ea amet ex amet labore commodo ea.
+            %p=simple_format(announcement.title) + simple_format(announcement.content) + simple_format(announcement.privacy)
 
             %footer 
-              %time January 1, 2013
+              %time=announcement.created_at.strftime("%B %d, %Y")
 
   = render :partial => "account/partials/sidebar_right"
