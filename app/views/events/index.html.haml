@@ -1,0 +1,12 @@
+.wrapper.body.clearfix
+  = render :partial => "account/partials/sidebar_left"
+
+  #calendar
+    %header.clearfix
+      %h3= "#{@calendar[:month]} #{@calendar[:year]}"
+      %ul
+        %li= link_to "<<", events_path({:month => @calendar[:previous_month].month, :year => @calendar[:previous_month].year})
+        %li= link_to "..", events_path
+        %li= link_to ">>", events_path({:month => @calendar[:next_month].month, :year => @calendar[:next_month].year})
+    - @calendar[:days].each do |date|
+      %div{:class => "day #{"unselectable" if date.nil?} #{"today" if !date.nil? and date.today?}", "data-date" => "#{date.day if !date.nil?}"}

@@ -1,0 +1,73 @@
+@import "compass"
+@import "mixins"
+
+body.events
+  .body
+    margin-top: 25px
+
+#calendar
+  +float-left
+  +box-sizing(border-box)
+  width: 774px
+  padding-left: 25px
+
+  header
+    margin-bottom: 10px
+
+    h3
+      display: inline-block
+      font: normal 2rem/1 "Open Sans Light"
+      color: #626f68
+      margin: 5px 0
+
+    ul
+      +float-right
+      margin: 0 14px -15px 0
+
+      li
+        +float-left
+        margin-right: -1px
+        &:first-of-type a
+          border-top-left-radius: 3px
+          border-bottom-left-radius: 3px
+        &:last-of-type a
+          border-top-right-radius: 3px
+          border-bottom-right-radius: 3px
+          margin-right: 0
+        
+      a
+        +box-sizing(border-box)
+        display: block
+        width: 25px
+        height: 25px
+        border: 1px solid #cccccc
+        background-color: #dddddd
+        font: normal 1.3rem "Consolas"
+        letter-spacing: -3px
+        padding: 4px 0 0 6px
+        &:hover, &:focus
+          background-color: #cccccc
+
+  .day
+    +float-left
+    +box-sizing(border-box)
+    width: 106px
+    height: 106px
+    margin: 0 -1px -1px 0
+    border: 1px solid #dedbd2
+    background-color: #fcfaf1
+    position: relative
+    &:before
+      content: attr(data-date)
+      position: absolute
+      top: 3px
+      left: 5px
+      font: normal 1.2rem "Open Sans", "OpenSansRegular"
+      color: #aeabc2
+
+    &.today
+
+    &.unselectable
+      background-color: #f3f2ea
+      &:before
+        display: none
