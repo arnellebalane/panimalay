@@ -14,8 +14,5 @@ class EventsController < ApplicationController
     month = params[:month].to_i if params[:month]
     year = params[:year].to_i if params[:year]
     @calendar = CalendarMagic::CalendarGenerator.generate_month(month, year)
-    Rails.logger.info "========================================================"
-    Rails.logger.info @calendar.inspect
-    Rails.logger.info "========================================================"
   end
 end

@@ -6,10 +6,7 @@ module CalendarMagic
       date = Date.civil(year, month, 1)
       calendar = {:month => @month_names[date.month - 1], :year => date.year}
       calendar[:days] = (date.beginning_of_month..date.end_of_month).to_a
-      calendar[:days].first.cwday.times { calendar[:days].unshift(nil) }
-      Rails.logger.info "======================"
-      Rails.logger.info date.end_of_month.cwday
-      Rails.logger.info "======================"
+      (calendar[:days].first.cwday % 7).times { calendar[:days].unshift(nil) }
       (6 - calendar[:days].last.wday).times { calendar[:days].push(nil) }
       calendar[:previous_month] = date.prev_month.beginning_of_month
       calendar[:next_month] = date.next_month.beginning_of_month
