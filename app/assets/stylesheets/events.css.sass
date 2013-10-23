@@ -72,22 +72,24 @@ body.events
     background-color: #fcfaf1
     position: relative
     cursor: pointer
+    padding: 42px 5px 0 5px
     &:before
       content: attr(data-day)
       position: absolute
-      top: 3px
+      top: 5px
       left: 5px
       font: normal 1.2rem "Open Sans", "OpenSansRegular"
       color: #aeabc2
     &:hover:after
-      content: "click to add event"
-      font: normal 1.2rem/1 "Open Sans"
-      color: #777777
-      text-align: center
-      width: 90px
+      content: "click to add an event"
       position: absolute
-      top: 42px
-      left: 6px
+      top: 10px
+      right: 6px
+      width: 70px
+      font: bold 1.3rem/0.8 "Open Sans", "OpenSansRegular"
+      color: #777777
+      text-align: right
+      letter-spacing: -1px
 
     &.today
 
@@ -96,6 +98,82 @@ body.events
       cursor: default
       &:before, &:hover:after
         display: none
+
+    div
+      font: normal 1.3rem/1 "Open Sans", "OpenSansRegular"
+      color: #ffffff
+      margin: 0
+      border-radius: 3px
+      padding: 3px 10px
+      position: relative
+      &.events
+        background-color: rgba(114, 154, 38, 0.85)
+        &:hover
+          background-color: rgba(114, 154, 38, 1.0)
+          background-color: rgba(114, 154, 38, 1.0)
+
+        .events-bubble
+          border: 1px solid rgba(114, 154, 38, 1.0)
+          .event
+            border-color: rgba(114, 154, 38, 1.0)
+
+      &.holidays
+        background-color: rgba(31, 125, 153, 0.85)
+        &:hover
+          background-color: rgba(31, 125, 153, 1.0)
+
+        .events-bubble
+          border: 1px solid rgba(31, 125, 153, 1.0)
+          .event
+            border-color: rgba(31, 125, 153, 1.0)
+
+      &.birthdays
+        background-color: rgba(178, 31, 23, 0.85)
+        &:hover
+          background-color: rgba(178, 31, 23, 1.0)
+
+        .events-bubble
+          border: 1px solid rgba(178, 31, 23, 1.0)
+          .event
+            border-color: rgba(178, 31, 23, 1.0)
+
+      &:hover .events-bubble
+        display: block
+
+      .events-bubble
+        display: none
+        position: absolute
+        top: 0
+        left: -257px
+        z-index: 1
+        width: 250px
+        height: 300px
+        overflow: auto
+        background-color: #ffffff
+
+        .events-list
+          padding: 0
+
+        .event
+          padding: 10px
+          border-bottom: 1px solid
+          &:last-of-type
+            border-bottom: none
+
+          h4
+            font: normal 1.4rem/1 "Open Sans", "OpenSansRegular"
+            color: #333333
+            margin: 0
+
+          time
+            font: normal 1.1rem/1 "Open Sans", "OpenSansRegular"
+            color: #777777
+            margin: 0
+
+          p
+            font: normal 1.3rem/1 "Open Sans", "OpenSansRegular"
+            color: #555555
+            margin: 5px 0 0 0
 
 #new-event-modal
   display: none
