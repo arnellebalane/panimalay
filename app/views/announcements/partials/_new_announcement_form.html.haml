@@ -3,8 +3,9 @@
     %span.profile-picture{:style => "background-image: url('#{path_to_photo @profpic}')"}
   = form_for :announcement do |f|
     .post-fields
-      = f.hidden_field :title, :value => "Temporary Title"
-      = f.hidden_field :privacy, :value => "public"
+      %section 
+        = f.text_field :title, :placeholder => "Announcement Title"
+        = select_tag "announcement[privacy]", options_for_select([["Public", "public"], ["Private", "private"]])
       = f.text_area :content, :placeholder => "Your announcement...", :class => "autosize", :required => true
     .actions.clearfix
       = f.submit "Post", :class => "button"

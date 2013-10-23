@@ -9,6 +9,11 @@ body.announcements
     width: 514px
     +box-sizing("border-box")
 
+    h5
+      font: normal 1.6rem/1 "Open Sans Light"
+      color: #333333
+      margin: 5px 0 10px 0
+
     h6
       font: normal 1.3rem/1 "Open Sans", "OpenSansRegular"
       color: #514721
@@ -22,3 +27,20 @@ body.announcements
 
     .post-fields
       display: block !important
+      padding: 0 !important
+
+      section
+        border-bottom: 1px solid #eeeeee
+        padding: 6px 9px
+
+        input[type="text"]
+          width: 327px
+          font-size: 1.3rem
+          border: none
+
+      textarea
+        padding: 15px
+        width: 407px
+
+  #new-post.focused .post-fields section
+    border-bottom-color: #cccccc
