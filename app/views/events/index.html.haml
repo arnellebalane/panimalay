@@ -5,8 +5,32 @@
     %header.clearfix
       %h3= "#{@calendar[:month]} #{@calendar[:year]}"
       %ul
+        = link_to "New Event", "#", :id => "new-event-hook"
         %li= link_to "<<", events_path({:month => @calendar[:previous_month].month, :year => @calendar[:previous_month].year})
         %li= link_to "..", events_path
         %li= link_to ">>", events_path({:month => @calendar[:next_month].month, :year => @calendar[:next_month].year})
     - @calendar[:days].each do |date|
-      %div{:class => "day #{"unselectable" if date.nil?} #{"today" if !date.nil? and date.today?}", "data-date" => "#{date.day if !date.nil?}"}
+      %div{:class => "day #{"unselectable" if date.nil?} #{"today" if !date.nil? and date.today?}", "data-day" => "#{date.day if !date.nil?}", "data-date" => "#{date.strftime("%B %d, %Y") if !date.nil?}"}
+
+#new-event-modal
+  #new-event-overlay
+  = form_for :event, :html => {:id => "new-event-form"} do |f|
+    %h3 Create New Event
+    .field
+      = f.label :title
+      = f.text_field :title
+    .field
+      = f.label :description
+      = f.text_area :description
+    .field
+      = f.label :venue
+      = f.text_field :venue
+    .field
+      = f.label :event_date, "Date"
+      = f.text_field :event_date
+    .field
+      = f.label :event_categories_id, "Category"
+      = select_tag "event[event_categories_id]", options_for_select(EventCategory.all.map { |category| [category.name, category.id] })
+    .field.actions.clearfix
+      = f.submit "Submit", :class => "button"
+      %input{:type => "button", :class => "button", :id => "cancel-event-creation", :value => "Cancel"}/ 
