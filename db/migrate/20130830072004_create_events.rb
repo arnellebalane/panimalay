@@ -7,7 +7,7 @@ class CreateEvents < ActiveRecord::Migration
       t.datetime :event_date
 
       t.references :event_categories, :null => false
-      t.references :users, :null => false
+      t.references :user, :null => false
       t.timestamps
     end
   end
