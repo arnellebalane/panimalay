@@ -18,5 +18,27 @@ class EventsController < ApplicationController
 
   def create
     title = params[:event][:title]
+    description = params[:event][:description]
+    venue = params[:event][:venue]
+    date = params[:event][:event_date]
+    category = params[:event][:event_categories_id]
+    if !title or !date
+      flash[:alert] = "Please fill up all the fields!"
+      redirect_to :back and return
+    end
+    event = Event.new
+    event.title = title
+    event.description = description
+    event.venue = venue
+    event.event_date = date
+    event.event_categories_id = category
+    event.user_id = session[:user_id]
+
+    if  event.save
+      flash[:notice] = "New event created successfully!"
+    else
+      flash[:alert] = "Event was not created!"
+    end
+    redirect_to :back
   end
 end
