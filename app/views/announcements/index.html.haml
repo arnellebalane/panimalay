@@ -21,7 +21,8 @@
               %span.profile-picture{:style => "background-image: url('#{path_to_photo(profpic)}')"}
               = link_to announcement.user.user_info.firstname + " " + announcement.user.user_info.lastname, account_path(announcement.user.id)
 
-            %p=simple_format(announcement.title) + simple_format(announcement.content) + simple_format(announcement.privacy)
+            %h5= announcement.title
+            %p=simple_format(announcement.content)
 
             %footer 
               %time=announcement.created_at.strftime("%B %d, %Y")

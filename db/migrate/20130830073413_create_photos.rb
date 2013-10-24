@@ -5,7 +5,8 @@ class CreatePhotos < ActiveRecord::Migration
       t.text :caption
       t.references :user, :null => false
       t.timestamps
-    end    
+    end
+    add_index :photos, :user_id
   end
 
   def down

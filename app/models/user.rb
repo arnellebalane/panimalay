@@ -15,6 +15,6 @@ class User < ActiveRecord::Base
   has_many :user_devices, :validate => true, :dependent => :destroy
   has_one :user_info, :validate => true, :dependent => :destroy
   has_many :user_logs, :validate => true, :dependent => :destroy
-  has_many :posts
+  has_many :posts, :dependent => :destroy
   has_many :comments, :through => :posts
 end

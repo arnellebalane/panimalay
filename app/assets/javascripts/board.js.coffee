@@ -21,9 +21,9 @@ posts =
     $("#new-post .post-fields[data-type!='#{selected}']").hide()
 
   contentFocus: ->
-    $("#new-post textarea").focus ->
+    $("#new-post textarea, #new-post input[type=text], #new-post select").focus ->
       $("#new-post").addClass("focused")
-    $("#new-post textarea").blur ->
+    $("#new-post textarea, #new-post input[type=text], #new-post select").blur ->
       $("#new-post").removeClass("focused")
 
 comments =

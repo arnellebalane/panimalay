@@ -5,12 +5,14 @@ Panimalay::Application.routes.draw do
     get :settings, :on => :collection
     put :update, :on => :collection
   end
+  resources :photos, :only => [:create]
   resources :board, :only => [:index]
   # resources :users do
   resources :posts, :only => [:show, :create, :destroy]
   resources :comments, :only => [:create, :destroy]
   # end
   resources :announcements, :only => [:index, :create]
+  resources :events, :only => [:index]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

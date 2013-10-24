@@ -1,9 +1,8 @@
 class CreatePosts < ActiveRecord::Migration
-  def change
+  def up
     create_table :posts do |t|
       t.text :content
-      t.references :user
-
+      t.references :user, :null => false
       t.timestamps
     end
     add_index :posts, :user_id
