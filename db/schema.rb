@@ -100,15 +100,18 @@ ActiveRecord::Schema.define(:version => 20130911144530) do
   end
 
   create_table "events", :force => true do |t|
-    t.string   "title",                                        :null => false
+    t.string   "title",                                      :null => false
     t.text     "description"
-    t.string   "venue",               :default => "Dormitory"
+    t.string   "venue",             :default => "Dormitory"
     t.datetime "event_date"
-    t.integer  "event_categories_id",                          :null => false
-    t.integer  "user_id",                                      :null => false
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
+    t.integer  "event_category_id",                          :null => false
+    t.integer  "user_id",                                    :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
+
+  add_index "events", ["event_category_id"], :name => "index_events_on_event_category_id"
+  add_index "events", ["user_id"], :name => "index_events_on_user_id"
 
   create_table "gatepass_users", :force => true do |t|
     t.integer  "gatepasses_id"
@@ -244,3 +247,4 @@ ActiveRecord::Schema.define(:version => 20130911144530) do
   end
 
 end
+>>>>>>> 7c54dafc39b7c8c595549ca0162fdf5459d00605

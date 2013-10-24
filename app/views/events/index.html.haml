@@ -11,6 +11,34 @@
         %li= link_to ">>", events_path({:month => @calendar[:next_month].month, :year => @calendar[:next_month].year})
     - @calendar[:days].each do |date|
       %div{:class => "day #{"unselectable" if date.nil?} #{"today" if !date.nil? and date.today?}", "data-day" => "#{date.day if !date.nil?}", "data-date" => "#{date.strftime("%B %d, %Y") if !date.nil?}"}
+        - if !date.nil?
+          .events
+            = "3 Events"
+            %section.events-bubble
+              .events-list
+                - 3.times do
+                  .event
+                    %h4 Event Title
+                    %time October 23, 2013
+                    %p Lorem ipsum Ad labore amet id irure dolore in irure est anim quis. Lorem ipsum Dolor sint laboris incididunt minim dolore sed.
+          .holidays 
+            = "2 Holidays"
+            %section.events-bubble
+              .events-list
+                - 3.times do
+                  .event
+                    %h4 Event Title
+                    %time October 23, 2013
+                    %p Lorem ipsum Ad labore amet id irure dolore in irure est anim quis. Lorem ipsum Dolor sint laboris incididunt minim dolore sed.
+          .birthdays 
+            = "1 Birthday"
+            %section.events-bubble
+              .events-list
+                - 3.times do
+                  .event
+                    %h4 Event Title
+                    %time October 23, 2013
+                    %p Lorem ipsum Ad labore amet id irure dolore in irure est anim quis. Lorem ipsum Dolor sint laboris incididunt minim dolore sed.
 
 #new-event-modal
   #new-event-overlay
