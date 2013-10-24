@@ -15,4 +15,8 @@ class EventsController < ApplicationController
     year = params[:year].to_i if params[:year]
     @calendar = CalendarMagic::CalendarGenerator.generate_month(month, year)
   end
+
+  def create
+    title = params[:event][:title]
+  end
 end
