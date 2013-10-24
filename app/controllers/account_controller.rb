@@ -68,7 +68,7 @@ class AccountController < ApplicationController
 
   	if (params[:user][:profile_picture])
   		filetype = "." + params[:user][:profile_picture].original_filename.split('.').last
-      if filetype == ".PNG" || filetype == ".png" || filetype == ".JPG" || filetype == ".jpg" || filetype == ".JPEG" || filetype == ".jpeg"
+      if filetype == ".PNG" || filetype == ".png" || filetype == ".JPG" || filetype == ".jpg" || filetype == ".JPEG" || filetype == ".jpeg" || filetype == ".GIF" || filetype == ".gif" || filetype == ".BMP" || filetype == ".bmp"
     		myString = "thequickbrownfoxjumpsoverthelazydogTHEQUICKBROWNFOXJUMPSOVERTHELAZYDOG1234567890"
     		filename = "";
     		while(filename == "" or Photo.where("filename = ?", filename).count > 0)
