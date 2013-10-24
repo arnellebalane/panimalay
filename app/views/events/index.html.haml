@@ -46,7 +46,7 @@
     %h3 Create New Event
     .field
       = f.label :title
-      = f.text_field :title
+      = f.text_field :title, :required => true
     .field
       = f.label :description
       = f.text_area :description
@@ -55,7 +55,7 @@
       = f.text_field :venue
     .field
       = f.label :event_date, "Date"
-      = f.text_field :event_date
+      = f.text_field :event_date, :required => true
     .field
       = f.label :event_categories_id, "Category"
       = select_tag "event[event_categories_id]", options_for_select(EventCategory.all.map { |category| [category.name, category.id] })

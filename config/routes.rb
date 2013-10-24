@@ -12,7 +12,7 @@ Panimalay::Application.routes.draw do
   resources :comments, :only => [:create, :destroy]
   # end
   resources :announcements, :only => [:index, :create]
-  resources :events, :only => [:index]
+  resources :events, :only => [:index, :create]
 
   match "/gallery", :to => "photos#index", :as => "gallery"
 
