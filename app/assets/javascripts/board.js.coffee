@@ -4,21 +4,29 @@ $(document).ready ->
 
 posts = 
   initialize: ->
-    posts.postTypeToggle()
+    $("#new-post .post-fields[data-type='post']").show()
     posts.contentFocus()
 
-  postTypeToggle: ->
-    posts.togglePostType()
-    $("#new-post .actions a").click (e) ->
+    $("#new-post .actions a[data-type='photo']").click (e) ->
       e.preventDefault()
-      $("#new-post .actions a.selected").removeClass("selected")
-      $(this).addClass("selected")
-      posts.togglePostType()
+      posts.attachPhoto()
 
-  togglePostType: ->
-    selected = $("#new-post .actions a.selected").data("type")
-    $("#new-post .post-fields[data-type='#{selected}']").show()
-    $("#new-post .post-fields[data-type!='#{selected}']").hide()
+    $("#new-post .actions a[data-type='post']").click (e) ->
+      e.preventDefault()
+      posts.detachPhoto()
+
+  attachPhoto: ->
+    $("#new-post .actions a[data-type='post']").removeClass("selected")
+    $("#new-post .actions a[data-type='photo']").addClass("selected")
+    $("#new-post .post-fields[data-type='photo']").show()
+    $("#new-post .post-fields[data-type='post'] textarea").attr("placeholder", "Photo caption")
+
+  detachPhoto: ->
+    $("#new-post .actions a[data-type='photo']").removeClass("selected")
+    $("#new-post .actions a[data-type='post']").addClass("selected")
+    $("#new-post .post-fields[data-type='photo']").hide()
+    $("#new-post .post-fields[data-type='post'] textarea").attr("placeholder", "Write something...")
+    $("#new-post .post-fields[data-type='photo'] input[type='file']").val("")
 
   contentFocus: ->
     $("#new-post textarea, #new-post input[type=text], #new-post select").focus ->
