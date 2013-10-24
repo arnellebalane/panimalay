@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(:version => 20130911144530) do
     t.string   "title",                                      :null => false
     t.text     "description"
     t.string   "venue",             :default => "Dormitory"
-    t.datetime "event_date"
+    t.datetime "event_date",                                 :null => false
     t.integer  "event_category_id",                          :null => false
     t.integer  "user_id",                                    :null => false
     t.datetime "created_at",                                 :null => false
@@ -247,4 +247,3 @@ ActiveRecord::Schema.define(:version => 20130911144530) do
   end
 
 end
->>>>>>> 7c54dafc39b7c8c595549ca0162fdf5459d00605

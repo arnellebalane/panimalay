@@ -1,0 +1,12 @@
+.wrapper.body.clearfix
+  #new-photo
+    = form_for :photo do |f|
+      #photo-container
+        #photo-preview
+        = f.file_field :photo, :accept => "image/*"
+      = f.text_area :caption, :placeholder => "Photo caption", :class => "autosize"
+      = f.submit "Publish Photo", :class => "button"
+
+  .photo-gallery
+    - 8.times do
+      .photo{:style => "background-image: url('#{path_to_photo "default.jpg"}')"}
