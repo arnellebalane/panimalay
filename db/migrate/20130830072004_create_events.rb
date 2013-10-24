@@ -4,7 +4,7 @@ class CreateEvents < ActiveRecord::Migration
       t.string :title, :null => false
       t.text :description
       t.string :venue, :default => "Dormitory"
-      t.datetime :event_date
+      t.datetime :event_date, :null => false
       t.references :event_category, :null => false
       t.references :user, :null => false
       t.timestamps
