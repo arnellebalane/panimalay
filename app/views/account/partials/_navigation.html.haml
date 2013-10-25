@@ -1,7 +1,7 @@
 %ul.float-left 
   %li= link_to "Profile", account_index_path, :class => "#{"current" if current_page?("account", "index")}"
   %li= link_to "Accountabilities", "#"
-  %li= link_to "Photos", photo_path(current_user.id), :class => "#{"current" if current_page?("photos", "show")}"
+  %li= link_to "Photos", photos_account_index_path, :class => "#{"current" if current_page?("account", "photos")}"
 
 %ul.float-right 
   %li= link_to "Settings", settings_account_index_path, :class => "#{"current" if current_page?("account", "settings")}"

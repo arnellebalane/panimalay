@@ -107,6 +107,16 @@ class AccountController < ApplicationController
   		flash[:alert] = "Errors were encounted while changing personal information!"
   	end
   	redirect_to :back  	
-  end  
+  end
+
+  def photos
+    @user = User.find(session[:user_id]);
+    @user_info = @user.user_info
+    if @user_info.photo_id
+      @profpic = Photo.find(@user_info.photo_id).filename
+    else
+      @profpic = "default.jpg"
+    end
+  end
 
 end
