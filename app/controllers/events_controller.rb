@@ -14,6 +14,10 @@ class EventsController < ApplicationController
     month = params[:month].to_i if params[:month]
     year = params[:year].to_i if params[:year]
     @calendar = CalendarMagic::CalendarGenerator.generate_month(month, year)
+
+    date_start = Date.new(year, month, 1)
+    date_end = Date.new(year, month, Time.days_in_month(month))
+    @events = Event.where(:event_date => date_start..date_end)
   end
 
   def create
@@ -21,7 +25,7 @@ class EventsController < ApplicationController
     description = params[:event][:description]
     venue = params[:event][:venue]
     date = params[:event][:event_date]
-    category = params[:event][:event_categories_id]
+    category = params[:event][:event_category_id]
     if !title or !date
       flash[:alert] = "Please fill up all the fields!"
       redirect_to :back and return
@@ -31,7 +35,7 @@ class EventsController < ApplicationController
     event.description = description
     event.venue = venue
     event.event_date = date
-    event.event_categories_id = category
+    event.event_category_id = category
     event.user_id = session[:user_id]
 
     if  event.save
