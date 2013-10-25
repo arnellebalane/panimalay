@@ -1,0 +1,21 @@
+.wrapper.body.clearfix
+  = render :partial => "account/partials/sidebar_left"
+
+  .photo-gallery
+    - 8.times do
+      .photo{:style => "background-image: url('#{path_to_photo "default.jpg"}')", "data-owner" => "1", "data-id" => "1"}
+
+#popup-modal
+  #popup-overlay
+  #popup.clearfix
+    #preview-section{:style => "background-image: url('#{path_to_photo "default.jpg"}')"}
+    #info-section
+      %header 
+        .close
+        %span.profile-picture
+        = link_to "Arnelle Balane", "#"
+
+      %p Lorem ipsum Laboris laborum ullamco eu ut fugiat nisi ut ut sit eu ea id veniam enim anim veniam tempor Excepteur dolor irure enim.
+
+      %footer 
+        %time October 25, 2013

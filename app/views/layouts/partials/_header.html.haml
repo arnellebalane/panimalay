@@ -10,7 +10,7 @@
           %li= link_to "Board", board_index_path, :class => "#{"highlighted" if current_page?('board')}"
           %li= link_to "Announcements", announcements_path, :class => "#{"highlighted" if current_page?('announcements')}"
           %li= link_to "Events", events_path, :class => "#{"highlighted" if current_page?('events')}"
-          %li= link_to "Gallery", gallery_path, :class => "#{"highlighted" if current_page?('photos')}"
+          %li= link_to "Gallery", gallery_path, :class => "#{"highlighted" if current_page?('photos', 'index')}"
 
 %nav#main-nav 
   .wrapper.clearfix
