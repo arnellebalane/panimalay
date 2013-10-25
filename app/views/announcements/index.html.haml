@@ -15,7 +15,7 @@
         - @announcements.each do |announcement|
           .activity
             %header 
-              - profpic = "default.png"
+              - profpic = "default.jpg"
               - if announcement.user.user_info.photo_id and Photo.find(announcement.user.user_info.photo_id)
                 - profpic = Photo.find(announcement.user.user_info.photo_id).filename
               %span.profile-picture{:style => "background-image: url('#{path_to_photo(profpic)}')"}

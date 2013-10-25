@@ -10,35 +10,44 @@
         %li= link_to "..", events_path
         %li= link_to ">>", events_path({:month => @calendar[:next_month].month, :year => @calendar[:next_month].year})
     - @calendar[:days].each do |date|
+      - day_events = []
+      - if date
+        - day_events = @events.where(:event_date => date)
       %div{:class => "day #{"unselectable" if date.nil?} #{"today" if !date.nil? and date.today?}", "data-day" => "#{date.day if !date.nil?}", "data-date" => "#{date.strftime("%B %d, %Y") if !date.nil?}"}
         - if !date.nil?
-          .events
-            = "3 Events"
-            %section.events-bubble
-              .events-list
-                - 3.times do
-                  .event
-                    %h4 Event Title
-                    %time October 23, 2013
-                    %p Lorem ipsum Ad labore amet id irure dolore in irure est anim quis. Lorem ipsum Dolor sint laboris incididunt minim dolore sed.
-          .holidays 
-            = "2 Holidays"
-            %section.events-bubble
-              .events-list
-                - 3.times do
-                  .event
-                    %h4 Event Title
-                    %time October 23, 2013
-                    %p Lorem ipsum Ad labore amet id irure dolore in irure est anim quis. Lorem ipsum Dolor sint laboris incididunt minim dolore sed.
-          .birthdays 
-            = "1 Birthday"
-            %section.events-bubble
-              .events-list
-                - 3.times do
-                  .event
-                    %h4 Event Title
-                    %time October 23, 2013
-                    %p Lorem ipsum Ad labore amet id irure dolore in irure est anim quis. Lorem ipsum Dolor sint laboris incididunt minim dolore sed.
+          - events = day_events.where(:event_category_id => 1)
+          - if events.count > 0
+            .events
+              = "#{events.count} #{" Event".pluralize(events.count)}"
+              %section.events-bubble
+                .events-list
+                  - events.each do |event|
+                    .event
+                      %h4= event.title
+                      %time= event.event_date.strftime("%B %d, %Y")
+                      %p= event.description
+          - events = day_events.where(:event_category_id => 2)
+          - if events.count > 0
+            .holidays
+              = "#{events.count} #{" Holiday".pluralize(events.count)}"
+              %section.events-bubble
+                .events-list
+                  - events.each do |event|
+                    .event
+                      %h4= event.title
+                      %time= event.event_date.strftime("%B %d, %Y")
+                      %p= event.description
+          - events = day_events.where(:event_category_id => 3)
+          - if events.count > 0
+            .birthdays 
+              = "#{events.count} #{" Birthday".pluralize(events.count)}"
+              %section.events-bubble
+                .events-list
+                  - events.each do |event|
+                    .event
+                      %h4= event.title
+                      %time= event.event_date.strftime("%B %d, %Y")
+                      %p= event.description
 
 #new-event-modal
   #new-event-overlay
@@ -57,8 +66,8 @@
       = f.label :event_date, "Date"
       = f.text_field :event_date, :required => true
     .field
-      = f.label :event_categories_id, "Category"
-      = select_tag "event[event_categories_id]", options_for_select(EventCategory.all.map { |category| [category.name, category.id] })
+      = f.label :event_category_id, "Category"
+      = select_tag "event[event_category_id]", options_for_select(EventCategory.all.map { |category| [category.name, category.id] })
     .field.actions.clearfix
       = f.submit "Submit", :class => "button"
       %input{:type => "button", :class => "button", :id => "cancel-event-creation", :value => "Cancel"}/ 
