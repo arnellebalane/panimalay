@@ -14,6 +14,8 @@ Panimalay::Application.routes.draw do
   resources :announcements, :only => [:index, :create]
   resources :events, :only => [:index, :create]
 
+  match "/gallery", :to => "photos#index", :as => "gallery"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

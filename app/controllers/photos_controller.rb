@@ -1,4 +1,7 @@
 class PhotosController < ApplicationController
+  def index
+  end
+
 	def create
 		if (params[:photo][:photo])
   		filetype = "." + params[:photo][:photo].original_filename.split('.').last
