@@ -1,0 +1,17 @@
+.wrapper.body.clearfix
+  = render :partial => "account/partials/sidebar_left"
+
+  %section#main-content 
+    %header 
+      %label Select Month
+      - i = 0
+      = select_tag :month, options_for_select(@months.map { |month| [month, i += 1] })
+      = select_tag :year, options_for_select((2013..2020).to_a.map { |year| [year, year] })
+
+    .accountability-list
+      - 5.times do
+        .accountability.cleared
+          %h3 Dorm Dues and Rental
+          %p 
+            = "Due Date:"
+            %time October 25, 2013

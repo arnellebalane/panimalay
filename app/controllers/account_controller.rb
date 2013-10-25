@@ -109,6 +109,17 @@ class AccountController < ApplicationController
   	redirect_to :back  	
   end
 
+  def accountabilities
+    @user = User.find(session[:user_id]);
+    @user_info = @user.user_info
+    if @user_info.photo_id
+      @profpic = Photo.find(@user_info.photo_id).filename
+    else
+      @profpic = "default.jpg"
+    end
+    @months = %W(January February March April May June July August September October November December)
+  end
+
   def photos
     @user = User.find(session[:user_id]);
     @user_info = @user.user_info

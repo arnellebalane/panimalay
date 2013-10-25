@@ -3,6 +3,7 @@ Panimalay::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
   resources :account, :only => [:index, :show] do
     get :settings, :on => :collection
+    get :accountabilities, :on => :collection
     get :photos, :on => :collection
     put :update, :on => :collection
   end
