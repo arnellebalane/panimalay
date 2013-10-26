@@ -156,3 +156,48 @@ body.account.settings
       text-align: center
       border-top: 1px solid #e4e1d8
       border-bottom: 1px solid #e4e1d8
+
+body.account.accountabilities
+  #main-content
+    background-color: #ffffff
+
+    header
+      padding: 25px
+      border-bottom: 1px solid #eeeeee
+
+      label
+        width: 90px
+
+    .accountability-list
+      padding: 15px 25px
+
+      .accountability
+        padding: 10px 0
+        border-bottom: 1px solid #eeeeee
+        position: relative
+        &:last-of-type
+          border-bottom: none
+        &.cleared:after
+          content: "CLEARED"
+          position: absolute
+          top: 15px
+          right: 0
+          font: bold 1.1rem/1 "Open Sans", "OpenSansRegular"
+          color: #ffffff
+          letter-spacing: -1px
+          text-transform: uppercase
+          background-color: #228822
+          padding: 5px
+          border-radius: 3px
+
+        h3
+          font: normal 1.6rem/1 "Open Sans Light"
+          color: #333333
+          margin: 0
+          width: 400px
+
+        p
+          font: normal 1.1rem "Open Sans"
+          color: #555555
+          margin: 1px 0 0 0
+          width: 400px

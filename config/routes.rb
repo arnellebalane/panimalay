@@ -3,10 +3,13 @@ Panimalay::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
   resources :account, :only => [:index, :show] do
     get :settings, :on => :collection
+    get :accountabilities, :on => :collection
     get :photos, :on => :collection
     put :update, :on => :collection
   end
-  resources :photos, :only => [:create]
+  resources :photos, :only => [:create] do
+    post :get_photo, :on => :collection
+  end
   resources :board, :only => [:index]
   # resources :users do
   resources :posts, :only => [:show, :create, :destroy]

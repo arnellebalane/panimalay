@@ -1,0 +1,46 @@
+BASE_URL = "<%= RAILS_ROOT %>"
+
+$(document).ready ->
+  photos.initialize()
+  console.log BASE_URL
+
+photos =
+  initialize: ->
+    $("#photo-preview").click (e) ->
+      $("#photo-container input[type='file']").click()
+
+    $("#photo-container input[type='file']").change ->
+      photos.previewPhoto(this.files[0])
+
+    $(".photo-gallery .photo").click ->
+      photos.showPhotoPopup($(this))
+
+    $("#popup-overlay, #popup .close").click photos.hidePhotoPopup
+    $(document).keydown (e) ->
+      if e.keyCode == 27
+        photos.hidePhotoPopup()
+
+  previewPhoto: (file) ->
+    reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = (data) ->
+      $("#photo-preview").css({"background-image": "url('#{data.target.result}')"})
+
+  showPhotoPopup: (photo) ->
+    photoId = photo.data("id")
+
+    $.ajax
+      url: BASE_URL + "/photos/get_photo"
+      type: "POST"
+      data: {id: photoId}
+      success: (data) ->
+        $("#popup-modal #preview-section").css({"background-image": "url('#{data.photo.url}')"})
+        $("#popup-modal #info-section p").text(data.photo.caption)
+        $("#popup-modal #info-section time").text(data.photo.created_at)
+        $("#popup-modal #info-section .profile-picture").css({"background-image": "url('#{data.user.profile_picture}')"})
+        $("#popup-modal #info-section a").text(data.user.name)
+
+        $("#popup-modal").fadeIn(250)
+
+  hidePhotoPopup: ->
+    $("#popup-modal").fadeOut(250)

@@ -4,7 +4,7 @@ $(document).ready ->
 events =
   initialize: ->
     $("#new-event-hook").click events.showNewEventModal
-    $("#calendar .day").click (e) ->
+    $("#calendar .day").not(".unselectable").click (e) ->
       $("#new-event-form #event_event_date").val($(this).data("date"))
       events.showNewEventModal(e)
 
