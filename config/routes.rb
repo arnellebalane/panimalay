@@ -7,7 +7,10 @@ Panimalay::Application.routes.draw do
     get :photos, :on => :collection
     put :update, :on => :collection
   end
-  resources :photos, :only => [:create]
+  resources :photos, :only => [:create] do
+    post :get_photo, :on => :collection
+    post :get_user, :on => :collection
+  end
   resources :board, :only => [:index]
   # resources :users do
   resources :posts, :only => [:show, :create, :destroy]
