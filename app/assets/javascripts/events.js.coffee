@@ -8,8 +8,10 @@ events =
       $("#new-event-form #event_event_date").val($(this).data("date"))
       events.showNewEventModal(e)
 
-    $("#new-event-overlay, #cancel-event-creation").click ->
-      events.hideNewEventModal()
+    $("#new-event-overlay, #cancel-event-creation").click events.hideNewEventModal
+    $(document).keydown (e) ->
+      if e.keyCode == 27
+        events.hideNewEventModal()
 
     events.bubble()
 
