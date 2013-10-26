@@ -15,3 +15,6 @@
 /tmp
 
 /public/photos
+
+# Don't ignore default.jpg
+!/public/photos/default.jpg
