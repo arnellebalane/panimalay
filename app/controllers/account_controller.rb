@@ -117,6 +117,7 @@ class AccountController < ApplicationController
     else
       @profpic = "default.jpg"
     end
+    @photos = Photo.order("created_at DESC")
   end
 
 end
