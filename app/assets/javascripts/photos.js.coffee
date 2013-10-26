@@ -15,6 +15,9 @@ photos =
       photos.showPhotoPopup($(this))
 
     $("#popup-overlay, #popup .close").click photos.hidePhotoPopup
+    $(document).keydown (e) ->
+      if e.keyCode == 27
+        photos.hidePhotoPopup()
 
   previewPhoto: (file) ->
     reader = new FileReader()
@@ -39,7 +42,7 @@ photos =
       url: BASE_URL + "photos/get_user"
       type: "POST"
       data: {id: ownerId}
-      success: (user) ->
+      success: (user) ->  
         $("#popup-modal #info-section .profile-picture").css({"background-image": "url('#{user.profile_picture}')"})
         $("#popup-modal #info-section a").text(user.name)
 
