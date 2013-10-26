@@ -1,19 +1,23 @@
 %aside.sidebar.float-right 
   %h3 This Week's Events
   %section
-    %p There are no events for this week.
+    - if @events.empty?
+      %p There are no events for this week.
 
-    - 2.times do
-      .event.events
-        %time Thu
-        %p Lorem Ipsum Dolor Sit Amet
+    - else 
+      - @events.each do |event|
 
-    - 2.times do
-      .event.holidays
-        %time Thu
-        %p Lorem Ipsum Dolor Sit Amet
+        - if event.event_category_id == 1
+          .event.events
+            %time= event.event_date.strftime("%a")
+            %p= event.title
 
-    - 2.times do
-      .event.birthdays
-        %time Thu
-        %p Lorem Ipsum Dolor Sit Amet
+        - elsif event.event_category_id == 2
+          .event.holidays
+            %time= event.event_date.strftime("%a")
+            %p= event.title
+
+        - elsif event.event_category_id == 3
+          .event.birthdays
+            %time= event.event_date.strftime("%a")
+            %p= event.title

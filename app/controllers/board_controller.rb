@@ -1,5 +1,4 @@
 class BoardController < ApplicationController
-
 	def index
 		@user_info = UserInfo.find(session[:user_id])
 		@activities = Post.order("created_at DESC")
@@ -13,5 +12,9 @@ class BoardController < ApplicationController
 		end
 		@post = Post.new
 		@photo = Photo.new
+
+		date_start = Date.today.beginning_of_week.yesterday
+    date_end = Date.today.end_of_week.yesterday
+    @events = Event.where(:event_date => date_start..date_end).order("event_date")
 	end
 end
