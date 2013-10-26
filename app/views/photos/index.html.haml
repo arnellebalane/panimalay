@@ -1,6 +1,6 @@
 .wrapper.body.clearfix
   #new-photo
-    = form_for :photo do |f|
+    = form_for @photo do |f|
       #photo-container
         #photo-preview
         = f.file_field :photo, :accept => "image/*"
@@ -8,8 +8,8 @@
       = f.submit "Publish Photo", :class => "button"
 
   .photo-gallery
-    - 8.times do
-      .photo{:style => "background-image: url('#{path_to_photo "default.jpg"}')", "data-owner" => "1", "data-id" => "1"}
+    - @photos.each do |photo|
+      .photo{:style => "background-image: url('#{path_to_photo photo.filename}')", "data-owner" => photo.user_id, "data-id" => photo.id}
 
 #popup-modal
   #popup-overlay
