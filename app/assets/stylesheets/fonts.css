@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'LatoRegular';
+  src: url('/assets/Lato/Lato-Reg-webfont.eot');
+  src: url('/assets/Lato/Lato-Reg-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/assets/Lato/Lato-Reg-webfont.woff') format('woff'),
+       url('/assets/Lato/Lato-Reg-webfont.ttf') format('truetype'),
+       url('/assets/Lato/Lato-Reg-webfont.svg#LatoRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSansRegular';
+  src: url('/assets/Open Sans/OpenSans-Regular-webfont.eot');
+  src: url('/assets/Open Sans/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/assets/Open Sans/OpenSans-Regular-webfont.woff') format('woff'),
+       url('/assets/Open Sans/OpenSans-Regular-webfont.ttf') format('truetype'),
+       url('/assets/Open Sans/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
