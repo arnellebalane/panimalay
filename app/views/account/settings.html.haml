@@ -12,7 +12,7 @@
           %span.button.unchanged#change-profile-picture Change
         %div 
           %label Email Address
-          = f.email_field :email
+          = f.email_field :email, :spellcheck => false
         %div 
           %label Password
           = f.password_field :password
@@ -25,46 +25,46 @@
           %h3.title Personal Information
           %div 
             %label Firstname
-            = u.text_field :firstname
+            = u.text_field :firstname, :spellcheck => false
           %div 
             %label Lastname
-            = u.text_field :lastname
+            = u.text_field :lastname, :spellcheck => false
           %div 
             %label Nickname
-            = u.text_field :nickname
+            = u.text_field :nickname, :spellcheck => false
           %div 
             %label Birthday
             = select_date @user_info.birthday, :prefix => :birthday, :start_year => 1990
           %div 
             %label Home Address
-            = u.text_field :address
+            = u.text_field :address, :spellcheck => false
           %div 
             %label Father's Name
-            = u.text_field :fathername
+            = u.text_field :fathername, :spellcheck => false
           %div 
             %label Mother's Name
-            = u.text_field :mothername
+            = u.text_field :mothername, :spellcheck => false
         
         %section 
           %h3.title Academic Information
           %div 
             %label Elementary
-            = u.text_field :elementary
+            = u.text_field :elementary, :spellcheck => false
           %div 
             %label Secondary
-            = u.text_field :secondary
+            = u.text_field :secondary, :spellcheck => false
           %div 
             %label College
-            = u.text_field :college
+            = u.text_field :college, :spellcheck => false, :disabled => true
           %div 
             %label STFAP Bracket
             = select_tag :bracket, options_for_select("A|B|C|D|E1|E2".split("|").map {|x| [x, x]}, @user_info.bracket) 
           %div 
             %label Student Number
-            = u.text_field :student_number
+            = u.text_field :student_number, :spellcheck => false
           %div 
             %label Degree Program
-            = u.text_field :course
+            = u.text_field :course, :spellcheck => false
           %div 
             %label Year Level
             = select_tag :year, options_for_select((1..4).to_a.map {|x| [x, x]}, @user_info.year)
@@ -73,17 +73,17 @@
           %h3.title Contact Information
           %div 
             %label Mobile Number
-            = u.text_field :contact_number
+            = u.text_field :contact_number, :spellcheck => false
           %p Person to contact in case of emergency
           %div 
             %label Name
-            = u.text_field :guardianname
+            = u.text_field :guardianname, :spellcheck => false
           %div 
             %label Address
-            = u.text_field :guardianaddress
+            = u.text_field :guardianaddress, :spellcheck => false
           %div 
             %label Contact Number
-            = u.text_field :guardiancontact_number
+            = u.text_field :guardiancontact_number, :spellcheck => false
 
         %footer
           = f.submit "Save Changes", :class => "button"

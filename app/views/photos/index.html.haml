@@ -4,7 +4,7 @@
       #photo-container
         #photo-preview
         = f.file_field :photo, :accept => "image/*"
-      = f.text_area :caption, :placeholder => "Caption", :class => "autosize"
+      = f.text_area :caption, :placeholder => "Caption", :class => "autosize", :spellcheck => false
       = f.submit "Publish Photo", :class => "button"
 
   .photo-gallery

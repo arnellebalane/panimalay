@@ -55,16 +55,16 @@
     %h3 Create New Event
     .field
       = f.label :title
-      = f.text_field :title, :required => true
+      = f.text_field :title, :required => true, :autocomplete => "off", :spellcheck => false
     .field
       = f.label :description
-      = f.text_area :description
+      = f.text_area :description, :spellcheck => false
     .field
       = f.label :venue
-      = f.text_field :venue
+      = f.text_field :venue, :autocomplete => "off", :spellcheck => false
     .field
       = f.label :event_date, "Date"
-      = f.text_field :event_date, :required => true
+      = f.text_field :event_date, :required => true, :autocomplete => "off", :spellcheck => false
     .field
       = f.label :event_category_id, "Category"
       = select_tag "event[event_category_id]", options_for_select(EventCategory.all.map { |category| [category.name, category.id] })
