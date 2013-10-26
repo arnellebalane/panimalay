@@ -76,7 +76,7 @@ class AccountController < ApplicationController
     			end
     			filename += filetype
     		end
-    		File.open(Rails.root.join('public', 'photos', filename), 'wb') do |file|
+    		File.open(File.join("public/photos", filename), 'wb') do |file|
       		file.write(params[:user][:profile_picture].read)
     		end
     		profpic = Photo.create(filename: filename, caption: "", user_id: session[:user_id])
