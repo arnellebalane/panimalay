@@ -9,7 +9,6 @@ Panimalay::Application.routes.draw do
   end
   resources :photos, :only => [:create] do
     post :get_photo, :on => :collection
-    post :get_user, :on => :collection
   end
   resources :board, :only => [:index]
   # resources :users do

@@ -33,26 +33,23 @@ class PhotosController < ApplicationController
   	redirect_to :back
 	end
 
-  def get_user
-    user = User.find(params[:id])
-    result = {
-      :name => "#{user.user_info.firstname} #{user.user_info.lastname}",
-    }
-    result[:profile_picture] = if user.user_info.photo_id.nil?
-      path_to_photo "default.jpg"
-    else
-      path_to_photo Photo.find(user.user_info.photo_id).filename
-    end
-    render :json => result
-  end
-
   def get_photo
     photo = Photo.find(params[:id])
     result = {
-      :url => path_to_photo(photo.filename),
-      :caption => photo.caption,
-      :created_at => photo.created_at.strftime("%B %d, %Y")
+      :photo => {
+        :url => path_to_photo(photo.filename),
+        :caption => photo.caption,
+        :created_at => photo.created_at.strftime("%B %d, %Y")
+      },
+      :user => {
+        :name => "#{photo.user.user_info.firstname} #{photo.user.user_info.lastname}"
+      }
     }
+    result[:user][:profile_picture] = if photo.user.user_info.photo_id.nil?
+      path_to_photo "default.jpg"
+    else
+      path_to_photo Photo.find(photo.user.user_info.photo_id).filename
+    end
     render :json => result
   end
 end

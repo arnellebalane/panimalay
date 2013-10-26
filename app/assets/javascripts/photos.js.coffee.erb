@@ -1,7 +1,8 @@
-BASE_URL = "http://localhost:3000/"
+BASE_URL = "<%= RAILS_ROOT %>"
 
 $(document).ready ->
   photos.initialize()
+  console.log BASE_URL
 
 photos =
   initialize: ->
@@ -26,27 +27,20 @@ photos =
       $("#photo-preview").css({"background-image": "url('#{data.target.result}')"})
 
   showPhotoPopup: (photo) ->
-    ownerId = photo.data("owner")
     photoId = photo.data("id")
 
     $.ajax
-      url: BASE_URL + "photos/get_photo"
+      url: BASE_URL + "/photos/get_photo"
       type: "POST"
       data: {id: photoId}
-      success: (photo) ->
-        $("#popup-modal #preview-section").css({"background-image": "url('#{photo.url}')"})
-        $("#popup-modal #info-section p").text(photo.caption)
-        $("#popup-modal #info-section time").text(photo.created_at)
+      success: (data) ->
+        $("#popup-modal #preview-section").css({"background-image": "url('#{data.photo.url}')"})
+        $("#popup-modal #info-section p").text(data.photo.caption)
+        $("#popup-modal #info-section time").text(data.photo.created_at)
+        $("#popup-modal #info-section .profile-picture").css({"background-image": "url('#{data.user.profile_picture}')"})
+        $("#popup-modal #info-section a").text(data.user.name)
 
-    $.ajax
-      url: BASE_URL + "photos/get_user"
-      type: "POST"
-      data: {id: ownerId}
-      success: (user) ->  
-        $("#popup-modal #info-section .profile-picture").css({"background-image": "url('#{user.profile_picture}')"})
-        $("#popup-modal #info-section a").text(user.name)
-
-    $("#popup-modal").fadeIn(250)
+        $("#popup-modal").fadeIn(250)
 
   hidePhotoPopup: ->
     $("#popup-modal").fadeOut(250)
