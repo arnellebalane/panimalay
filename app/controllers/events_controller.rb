@@ -16,7 +16,7 @@ class EventsController < ApplicationController
     @calendar = CalendarMagic::CalendarGenerator.generate_month(month, year)
 
     date_start = Date.new(year, month, 1)
-    date_end = Date.new(year, month, Time.days_in_month(month))
+    date_end = date_start.end_of_month
     @events = Event.where(:event_date => date_start..date_end)
   end
 
