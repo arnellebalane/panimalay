@@ -34,4 +34,9 @@ Panimalay::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.after_initialize do
+    Configuration.base_url = "http://localhost:3000/"
+  end
+
 end

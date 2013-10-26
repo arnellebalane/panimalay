@@ -1,1 +1,0 @@
-RAILS_ROOT = "http://localhost:3000"
