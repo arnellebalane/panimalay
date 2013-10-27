@@ -66,7 +66,7 @@ Panimalay::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   config.after_initialize do
-    Configuration.base_url = "http://192.170.10.197:3000/"
+    Configuration.base_url = "http://panimalay.herokuapp.com/"
   end
 
 end
