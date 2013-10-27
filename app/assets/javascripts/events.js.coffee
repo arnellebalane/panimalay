@@ -5,8 +5,9 @@ events =
   initialize: ->
     $("#new-event-hook").click events.showNewEventModal
     $("#calendar .day").not(".unselectable").click (e) ->
-      $("#new-event-form #event_event_date").val($(this).data("date"))
-      events.showNewEventModal(e)
+      if e.target.tagName != "A"
+        $("#new-event-form #event_event_date").val($(this).data("date"))
+        events.showNewEventModal(e)
 
     $("#new-event-overlay, #cancel-event-creation").click events.hideNewEventModal
     $(document).keydown (e) ->
