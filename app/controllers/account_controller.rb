@@ -8,10 +8,10 @@ class AccountController < ApplicationController
     @activities += @user.photos.order("created_at DESC")
     @activities.sort_by!{|act| act.created_at}
 		if @user_info.photo_id
-			@profpic = Photo.find(@user_info.photo_id).filename
-		else
-			@profpic = "default.jpg"
-		end
+      @profpic = Photo.find(@user_info.photo_id).id.to_s
+    else
+      @profpic = "0"
+    end
     
     date_start = Date.today.tomorrow.beginning_of_week.yesterday
     date_end = date_start.tomorrow.end_of_week.yesterday
@@ -26,10 +26,10 @@ class AccountController < ApplicationController
     @activities += @user.photos.order("created_at DESC")
     @activities.sort_by!{|act| act.created_at}
 		if @user_info.photo_id
-			@profpic = Photo.find(@user_info.photo_id).filename
-		else
-			@profpic = "default.jpg"
-		end
+      @profpic = Photo.find(@user_info.photo_id).id.to_s
+    else
+      @profpic = "0"
+    end
 
     date_start = Date.today.tomorrow.beginning_of_week.yesterday
     date_end = date_start.tomorrow.end_of_week.yesterday
@@ -41,9 +41,9 @@ class AccountController < ApplicationController
     @user = User.find(session[:user_id])
     @user_info = @user.user_info
     if @user_info.photo_id
-			@profpic = Photo.find(@user_info.photo_id).filename
+			@profpic = Photo.find(@user_info.photo_id).id.to_s
 		else
-			@profpic = "default.jpg"
+			@profpic = "0"
 		end
   end
 
@@ -69,25 +69,23 @@ class AccountController < ApplicationController
   	end  	
 
   	if (params[:user][:profile_picture])
-  		filetype = "." + params[:user][:profile_picture].original_filename.split('.').last
-      if filetype == ".PNG" || filetype == ".png" || filetype == ".JPG" || filetype == ".jpg" || filetype == ".JPEG" || filetype == ".jpeg" || filetype == ".GIF" || filetype == ".gif" || filetype == ".BMP" || filetype == ".bmp"
-    		myString = "thequickbrownfoxjumpsoverthelazydogTHEQUICKBROWNFOXJUMPSOVERTHELAZYDOG1234567890"
-    		filename = "";
-    		while(filename == "" or Photo.where("filename = ?", filename).count > 0)
-    			filename = ""
-    			20.times do 
-    				filename += myString[rand(myString.length)]
-    			end
-    			filename += filetype
-    		end
-    		File.open(Rails.root.join('public', 'photos', filename), 'wb') do |file|
-      		file.write(params[:user][:profile_picture].read)
-    		end
-    		profpic = Photo.create(filename: filename, caption: "", user_id: session[:user_id])
-    		@user_info[:photo_id] = profpic.id
+  		file_type = params[:user][:profile_picture].original_filename.split(".").last.downcase
+      if ["png", "jpg", "jpeg", "gif", "bmp"].include? file_type
+        myString = "thequickbrownfoxjumpsoverthelazydogTHEQUICKBROWNFOXJUMPSOVERTHELAZYDOG1234567890"
+        filename = "#{Array.new(20) { myString[rand(myString.length)] }.join}.#{file_type}"
+        while Photo.where(:filename => filename).count > 0
+          filename = "#{Array.new(20) { myString[rand(myString.length)] }.join}.#{file_type}"
+        end
+        photo = Photo.create(
+          :filename => filename,
+          :caption => "",
+          :user_id => session[:user_id],
+          :mime_type => params[:user][:profile_picture].content_type
+        )
+        binary = Binary.create(:data => params[:user][:profile_picture].read, :photo_id => photo.id)
+        @user_info[:photo_id] = photo.id
       else
-        flash[:alert] = "Invalid format for profile picture!"
-        redirect_to :back and return
+        redirect_to :back, :alert => "Invalid format for profile picture!" and return
       end
   	end  
 
@@ -121,9 +119,9 @@ class AccountController < ApplicationController
     @user = User.find(session[:user_id]);
     @user_info = @user.user_info
     if @user_info.photo_id
-      @profpic = Photo.find(@user_info.photo_id).filename
+      @profpic = Photo.find(@user_info.photo_id).id.to_s
     else
-      @profpic = "default.jpg"
+      @profpic = "0"
     end
     @months = %W(January February March April May June July August September October November December)
   end
@@ -132,9 +130,9 @@ class AccountController < ApplicationController
     @user = User.find(session[:user_id]);
     @user_info = @user.user_info
     if @user_info.photo_id
-      @profpic = Photo.find(@user_info.photo_id).filename
+      @profpic = Photo.find(@user_info.photo_id).id.to_s
     else
-      @profpic = "default.jpg"
+      @profpic = "0"
     end
     @photos = Photo.order("created_at DESC").where(:user_id => session[:user_id])
   end

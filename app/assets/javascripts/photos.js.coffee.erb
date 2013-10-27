@@ -1,4 +1,4 @@
-BASE_URL = "<%= RAILS_ROOT %>"
+BASE_URL = "<%= ::Configuration.base_url %>"
 
 $(document).ready ->
   photos.initialize()
@@ -26,6 +26,8 @@ photos =
       $("#photo-preview").css({"background-image": "url('#{data.target.result}')"})
 
   showPhotoPopup: (photo) ->
+    $("#popup-modal").show()
+
     photoId = photo.data("id")
 
     $.ajax
@@ -34,12 +36,12 @@ photos =
       data: {id: photoId}
       success: (data) ->
         $("#popup-modal #preview-section").css({"background-image": "url('#{data.photo.url}')"})
-        $("#popup-modal #info-section p").text(data.photo.caption)
+        $("#popup-modal #info-section p").html(data.photo.caption.replace(/\r\n/g, "<br/>"))
         $("#popup-modal #info-section time").text(data.photo.created_at)
         $("#popup-modal #info-section .profile-picture").css({"background-image": "url('#{data.user.profile_picture}')"})
         $("#popup-modal #info-section a").text(data.user.name)
 
-        $("#popup-modal").fadeIn(250)
+        $("#popup").show()
 
   hidePhotoPopup: ->
-    $("#popup-modal").fadeOut(250)
+    $("#popup-modal, #popup").hide()

@@ -1,10 +1,21 @@
 class AnnouncementsController < ApplicationController
+  skip_before_filter :require_login, :only => [:index]
+
   def index
-    @user_info = UserInfo.find(session[:user_id])
-    if @user_info.photo_id
-      @profpic = Photo.find(@user_info.photo_id).filename
+    if user_logged_in?
+      @user_info = UserInfo.find(session[:user_id])
+      if @user_info.photo_id
+        @profpic = Photo.find(@user_info.photo_id).id.to_s
+      else
+        @profpic = "0"
+      end
+      @announcements = Announcement.order("created_at DESC")
+
+      date_start = Date.today.beginning_of_week.yesterday
+      date_end = Date.today.end_of_week.yesterday
+      @events = Event.where(:event_date => date_start..date_end).order("event_date")
     else
-      @profpic = "default.jpg"
+      render :template => "announcements/public"
     end
     @announcements = Announcement.order("created_at DESC")
 

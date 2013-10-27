@@ -4,31 +4,28 @@ class PostsController < ApplicationController
     @comment = Comment.new
     @user_info = @post.user.user_info
     if @user_info.photo_id
-      @profpic = Photo.find(@user_info.photo_id).filename
+      @profpic = Photo.find(@user_info.photo_id).id.to_s
     else
-      @profpic = "default.jpg"
+      @profpic = "0"
     end
   end
 
   def create
     if (params[:post][:photo])
-      valid_filetypes = ["jpg", "png", "jpeg", "bmp", "gif"];
-      filetype = params[:post][:photo].original_filename.split('.').last
-      if valid_filetypes.include?(filetype.downcase)
-        filetype = "." + filetype
+      file_type = params[:post][:photo].original_filename.split(".").last.downcase
+      if ["png", "jpg", "jpeg", "gif", "bmp"].include? file_type
         myString = "thequickbrownfoxjumpsoverthelazydogTHEQUICKBROWNFOXJUMPSOVERTHELAZYDOG1234567890"
-        filename = "";
-        while(filename == "" or Photo.where("filename = ?", filename).count > 0)
-          filename = ""
-          20.times do 
-            filename += myString[rand(myString.length)]
-          end
-          filename += filetype
+        filename = "#{Array.new(20) { myString[rand(myString.length)] }.join}.#{file_type}"
+        while Photo.where(:filename => filename).count > 0
+          filename = "#{Array.new(20) { myString[rand(myString.length)] }.join}.#{file_type}"
         end
-        File.open(Rails.root.join('public', 'photos', filename), 'wb') do |file|
-          file.write(params[:post][:photo].read)
-        end
-        photo = Photo.create(filename: filename, caption: params[:post][:content], user_id: session[:user_id])
+        photo = Photo.create(
+          :filename => filename,
+          :caption => params[:post][:content],
+          :user_id => session[:user_id],
+          :mime_type => params[:post][:photo].content_type
+        )
+        binary = Binary.create(:data => params[:post][:photo].read, :photo_id => photo.id)
         flash[:notice] = "Posted!"
       else
         flash[:alert] = "Invalid File!"

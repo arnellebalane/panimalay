@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130911144530) do
+ActiveRecord::Schema.define(:version => 20131027035056) do
 
   create_table "accountabilities", :force => true do |t|
     t.string   "name",        :null => false
@@ -36,6 +36,13 @@ ActiveRecord::Schema.define(:version => 20130911144530) do
     t.integer  "users_id"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
+  end
+
+  create_table "binaries", :force => true do |t|
+    t.binary   "data"
+    t.integer  "photo_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "comments", :force => true do |t|
@@ -144,10 +151,11 @@ ActiveRecord::Schema.define(:version => 20130911144530) do
 
   create_table "photos", :force => true do |t|
     t.string   "filename"
-    t.text     "caption"
-    t.integer  "user_id",    :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "caption",    :default => ""
+    t.integer  "user_id",                    :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.string   "mime_type"
   end
 
   add_index "photos", ["user_id"], :name => "index_photos_on_user_id"
