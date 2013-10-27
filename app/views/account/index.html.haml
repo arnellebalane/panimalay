@@ -27,6 +27,10 @@
             %footer
               %time= activity.created_at.strftime("%B %d, %Y at %I:%M %p")
               = link_to pluralize(activity.comments.length, "Comment"), "#", :class => "comment-hook"
+              - if activity.class.name == "Post"
+                = link_to "Delete", post_path(activity.id), :method=>:delete
+              - if activity.class.name == "Photo"
+                = link_to "Delete", photo_path(activity.id), :method=>:delete
             .comments
               - activity.comments.each do |comment|
                 .comment.clearfix
@@ -39,7 +43,10 @@
                     - name = user.user_info.firstname + " " + user.user_info.lastname
                     = link_to name, account_path(user.id)
                     %p= simple_format(comment.content)
-                    %time= comment.created_at.strftime("%B %d, %Y at %I:%M %p")
+                    %footer 
+                      %time= comment.created_at.strftime("%B %d, %Y at %I:%M %p")
+                      - if current_user.id == comment.user.id
+                        = link_to "Delete", "#", :method => :delete
 
               = form_for @comment, :html => {:class => "new-comment clearfix"} do |f|
                 = f.hidden_field :parent_id, :value => activity.id
