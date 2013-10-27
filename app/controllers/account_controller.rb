@@ -65,25 +65,24 @@ class AccountController < ApplicationController
   	end  	
 
   	if (params[:user][:profile_picture])
-  		filetype = "." + params[:user][:profile_picture].original_filename.split('.').last
-      if filetype == ".PNG" || filetype == ".png" || filetype == ".JPG" || filetype == ".jpg" || filetype == ".JPEG" || filetype == ".jpeg" || filetype == ".GIF" || filetype == ".gif" || filetype == ".BMP" || filetype == ".bmp"
-    		myString = "thequickbrownfoxjumpsoverthelazydogTHEQUICKBROWNFOXJUMPSOVERTHELAZYDOG1234567890"
-    		filename = "";
-    		while(filename == "" or Photo.where("filename = ?", filename).count > 0)
-    			filename = ""
-    			20.times do 
-    				filename += myString[rand(myString.length)]
-    			end
-    			filename += filetype
-    		end
-    		File.open(Rails.root.join('public', 'photos', filename), 'wb') do |file|
-      		file.write(params[:user][:profile_picture].read)
-    		end
-    		profpic = Photo.create(filename: filename, caption: "", user_id: session[:user_id])
-    		@user_info[:photo_id] = profpic.id
+  		file_type = params[:user][:profile_picture].original_filename.split(".").last.downcase
+      if ["png", "jpg", "jpeg", "gif", "bmp"].include? file_type
+        myString = "thequickbrownfoxjumpsoverthelazydogTHEQUICKBROWNFOXJUMPSOVERTHELAZYDOG1234567890"
+        filename = "#{Array.new(20) { myString[rand(myString.length)] }.join}.#{file_type}"
+        while Photo.where(:filename => filename).count > 0
+          filename = "#{Array.new(20) { myString[rand(myString.length)] }.join}.#{file_type}"
+        end
+        binary = Binary.create(:data => params[:user][:profile_picture].read)
+        photo = Photo.create(
+          :filename => filename,
+          :caption => "",
+          :user_id => session[:user_id],
+          :binary_id => binary.id,
+          :mime_type => params[:user][:profile_picture].content_type
+        )
+        @user_info[:photo_id] = photo.id
       else
-        flash[:alert] = "Invalid format for profile picture!"
-        redirect_to :back and return
+        redirect_to :back, :alert => "Invalid format for profile picture!" and return
       end
   	end  
 
