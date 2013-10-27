@@ -44,3 +44,50 @@ body.announcements
 
   #new-post.focused .post-fields section
     border-bottom-color: #cccccc
+
+  .announcement
+    width: 700px
+    margin: 0 auto 25px auto
+    padding-left: 75px
+
+    .details
+      background-color: #ffffff
+      box-shadow: 0 1px 0 #e4e1d8
+
+    header
+      position: relative
+      border-bottom: 1px solid #eeeeee
+      padding: 25px
+
+      .profile-picture
+        +float-left
+        width: 60px
+        height: 60px
+        position: absolute
+        top: 0
+        left: -75px
+        border: 3px solid #ffffff
+        box-shadow: 0 1px 0 #e4e1d8
+
+      h2
+        font: normal 2rem/1 "Open Sans Light"
+        color: #333333
+        margin: 0
+
+      h3
+        font: normal 1.5rem/1 "Open Sans", "OpenSansRegular"
+        color: #555555
+        margin: 10px 0 0 0
+
+      time
+        font: normal 1.3rem/1 "Open Sans", "OpenSansRegular"
+        color: #777777
+
+    .content
+      padding: 25px
+
+      p
+        font: normal 1.4rem "Open Sans", "OpenSansRegular"
+        color: #444444
+        &:last-of-type
+          margin: 0

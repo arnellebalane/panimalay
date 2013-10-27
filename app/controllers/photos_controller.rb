@@ -1,4 +1,6 @@
 class PhotosController < ApplicationController
+  skip_before_filter :require_login, :only => [:serve]
+
   def index
     @photo = Photo.new
     @photos = Photo.order("created_at DESC")
