@@ -56,7 +56,7 @@
               = form_for @comment, :html => {:class => "new-comment clearfix"} do |f|
                 = f.hidden_field :parent_id, :value => activity.id
                 = f.hidden_field :parent_class_name, :value => activity.class.name
-                = f.text_area :content, :placeholder => "Your comment..."
+                = f.text_area :content, :placeholder => "Your comment...", :class => "autosize"
                 = f.submit "Post", :class => "button"
 
   = render :partial => "account/partials/sidebar_right"
