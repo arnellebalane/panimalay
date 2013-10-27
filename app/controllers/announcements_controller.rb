@@ -8,8 +8,8 @@ class AnnouncementsController < ApplicationController
     end
     @announcements = Announcement.order("created_at DESC")
 
-    date_start = Date.today.beginning_of_week.yesterday
-    date_end = Date.today.end_of_week.yesterday
+    date_start = Date.today.tomorrow.beginning_of_week.yesterday
+    date_end = date_start.tomorrow.end_of_week.yesterday
     @events = Event.where(:event_date => date_start..date_end).order("event_date")
   end
 
