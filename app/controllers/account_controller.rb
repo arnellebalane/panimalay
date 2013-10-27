@@ -13,8 +13,8 @@ class AccountController < ApplicationController
       @profpic = "0"
     end
     
-    date_start = Date.today.beginning_of_week.yesterday
-    date_end = Date.today.end_of_week.yesterday
+    date_start = Date.today.tomorrow.beginning_of_week.yesterday
+    date_end = date_start.tomorrow.end_of_week.yesterday
     @events = Event.where(:event_date => date_start..date_end).order("event_date")
 	end
 
@@ -30,6 +30,10 @@ class AccountController < ApplicationController
     else
       @profpic = "0"
     end
+
+    date_start = Date.today.tomorrow.beginning_of_week.yesterday
+    date_end = date_start.tomorrow.end_of_week.yesterday
+    @events = Event.where(:event_date => date_start..date_end).order("event_date")
 		render :template => "account/index"
 	end
 
@@ -130,7 +134,7 @@ class AccountController < ApplicationController
     else
       @profpic = "0"
     end
-    @photos = Photo.order("created_at DESC")
+    @photos = Photo.order("created_at DESC").where(:user_id => session[:user_id])
   end
 
 end
