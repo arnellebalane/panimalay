@@ -30,5 +30,7 @@
 
             %footer 
               %time=announcement.created_at.strftime("%B %d, %Y")
+              - if current_user.id == announcement.user.id
+                = link_to "Delete", "#"
 
   = render :partial => "account/partials/sidebar_right"
