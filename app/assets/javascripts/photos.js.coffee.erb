@@ -26,6 +26,8 @@ photos =
       $("#photo-preview").css({"background-image": "url('#{data.target.result}')"})
 
   showPhotoPopup: (photo) ->
+    $("#popup-modal").show()
+
     photoId = photo.data("id")
 
     $.ajax
@@ -39,7 +41,7 @@ photos =
         $("#popup-modal #info-section .profile-picture").css({"background-image": "url('#{data.user.profile_picture}')"})
         $("#popup-modal #info-section a").text(data.user.name)
 
-        $("#popup-modal").fadeIn(250)
+        $("#popup").show()
 
   hidePhotoPopup: ->
-    $("#popup-modal").fadeOut(250)
+    $("#popup-modal, #popup").hide()
