@@ -6,6 +6,10 @@
       = render :partial => "board/partials/new_post_form"
 
       %p.title Latest Posts
+  
+      - if @activities.empty?
+        %p.empty-results No Posts Found
+
       .activities
         - @activities.reverse.each do |activity|
           .activity

@@ -6,6 +6,10 @@
 
     .activity-list
       %p.title Recent Activities
+      
+      - if @activities.empty?
+        %p.empty-results No Activities Found
+
       .activities
         - @activities.reverse.each do |activity|
           .activity

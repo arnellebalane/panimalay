@@ -11,6 +11,10 @@
       = render :partial => "announcements/partials/new_announcement_form"
 
       %p.title Latest Announcements
+
+      - if @announcements.empty?
+        %p.empty-results No Announcements Found
+
       .activities
         - @announcements.each do |announcement|
           .activity

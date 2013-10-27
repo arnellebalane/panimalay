@@ -8,6 +8,9 @@
       = f.submit "Publish Photo", :class => "button"
 
   .photo-gallery
+    - if @photos.empty?
+      %p.empty-results No Photos Found
+
     - @photos.each do |photo|
       .photo{:style => "background-image: url('#{serve_photo_path photo.id}')", "data-id" => photo.id}
 

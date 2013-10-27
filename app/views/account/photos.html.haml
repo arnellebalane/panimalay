@@ -2,6 +2,9 @@
   = render :partial => "account/partials/sidebar_left"
 
   .photo-gallery
+    - if @photos.empty?
+      %p.empty-results No Photos Found
+
     - @photos.each do |photo|
       .photo{:style => "background-image: url('#{serve_photo_path photo.id}')", "data-owner" => photo.user_id, "data-id" => photo.id}
 
