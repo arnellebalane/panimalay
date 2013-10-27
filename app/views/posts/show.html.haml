@@ -12,7 +12,7 @@
     = link_to "#{@post.comments.length} Comment", "#", :class => "comment-hook"
 
   .comments
-    - @post.comments.each do |comment|
+    - @post.comments.reverse.each do |comment|
       .comment.clearfix
         %span.profile-picture{:style => "background-image: url('#{image_path "profile-picture.jpg"}')"}
         %div
