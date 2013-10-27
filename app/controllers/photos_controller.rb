@@ -6,23 +6,20 @@ class PhotosController < ApplicationController
 
 	def create
 		if (params[:photo][:photo])
-  		valid_filetypes = ["jpg", "png", "jpeg", "bmp", "gif"];
-      filetype = params[:photo][:photo].original_filename.split('.').last
-      if valid_filetypes.include?(filetype.downcase)
-        filetype = "." + filetype
+  		file_type = params[:photo][:photo].original_filename.split(".").last.downcase
+      if ["png", "jpg", "jpeg", "gif", "bmp"].include? file_type
         myString = "thequickbrownfoxjumpsoverthelazydogTHEQUICKBROWNFOXJUMPSOVERTHELAZYDOG1234567890"
-        filename = "";
-        while(filename == "" or Photo.where("filename = ?", filename).count > 0)
-          filename = ""
-          20.times do 
-            filename += myString[rand(myString.length)]
-          end
-          filename += filetype
+        filename = "#{Array.new(20) { myString[rand(myString.length)] }.join}.#{file_type}"
+        while Photo.where(:filename => filename).count > 0
+          filename = "#{Array.new(20) { myString[rand(myString.length)] }.join}.#{file_type}"
         end
-        File.open(Rails.root.join('public', 'photos', filename), 'wb') do |file|
-          file.write(params[:photo][:photo].read)
-        end
-        photo = Photo.create(filename: filename, caption: params[:photo][:caption], user_id: session[:user_id])
+        photo = Photo.create(
+          :filename => filename,
+          :caption => params[:photo][:caption],
+          :user_id => session[:user_id],
+          :mime_type => params[:photo][:photo].content_type
+        )
+        binary = Binary.create(:data => params[:photo][:photo].read, :photo_id => photo.id)
         flash[:notice] = "Photo Uploaded!"
       else
         flash[:alert] = "Invalid File!"
@@ -37,7 +34,7 @@ class PhotosController < ApplicationController
     photo = Photo.find(params[:id])
     result = {
       :photo => {
-        :url => path_to_photo(photo.filename),
+        :url => serve_photo_path(photo),
         :caption => photo.caption,
         :created_at => photo.created_at.strftime("%B %d, %Y")
       },
@@ -46,10 +43,20 @@ class PhotosController < ApplicationController
       }
     }
     result[:user][:profile_picture] = if photo.user.user_info.photo_id.nil?
-      path_to_photo "default.jpg"
+      serve_photo_path "0"
     else
-      path_to_photo Photo.find(photo.user.user_info.photo_id).filename
+      serve_photo_path Photo.find(photo.user.user_info.photo_id).id.to_s
     end
     render :json => result
+  end
+
+  def serve
+    if params[:id] == "0"
+      photo = File.open("public/photos/default.jpg").read
+      send_data(photo, :content_type => "image/jpeg", :filename => "default.jpg", :disposition => "inline")
+    else
+      photo = Photo.find(params[:id])
+      send_data(photo.binary.data, :content_type => photo.mime_type, :filename => photo.filename, :disposition => "inline")
+    end
   end
 end

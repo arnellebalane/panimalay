@@ -15,10 +15,10 @@
         - @announcements.each do |announcement|
           .activity
             %header 
-              - profpic = "default.jpg"
+              - profpic = "0"
               - if announcement.user.user_info.photo_id and Photo.find(announcement.user.user_info.photo_id)
-                - profpic = Photo.find(announcement.user.user_info.photo_id).filename
-              %span.profile-picture{:style => "background-image: url('#{path_to_photo(profpic)}')"}
+                - profpic = Photo.find(announcement.user.user_info.photo_id).id.to_s
+              %span.profile-picture{:style => "background-image: url('#{serve_photo_path profpic}')"}
               = link_to announcement.user.user_info.firstname + " " + announcement.user.user_info.lastname, account_path(announcement.user.id)
 
             %h5= announcement.title

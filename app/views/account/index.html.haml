@@ -10,7 +10,7 @@
         - @activities.reverse.each do |activity|
           .activity
             %header 
-              %span.profile-picture{:style => "background-image: url('#{path_to_photo @profpic}')"}
+              %span.profile-picture{:style => "background-image: url('#{serve_photo_path @profpic}')"}
               - name = activity.user.user_info.firstname + " " + activity.user.user_info.lastname
               = link_to name, account_path(activity.user.id)
 
@@ -18,7 +18,7 @@
               %p= simple_format(activity.content)
             - else 
               %p= simple_format(activity.caption)
-              = image_tag "#{path_to_photo activity.filename}"
+              = image_tag "#{serve_photo_path activity.id}"
 
             %footer
               %time= activity.created_at.strftime("%B %d, %Y at %I:%M %p")
@@ -26,10 +26,10 @@
             .comments
               - activity.comments.each do |comment|
                 .comment.clearfix
-                  - profpic = "default.jpg"
+                  - profpic = "0"
                   - if comment.user.user_info.photo_id and Photo.find(comment.user.user_info.photo_id)
-                    - profpic = Photo.find(comment.user.user_info.photo_id).filename
-                  %span.profile-picture{:style => "background-image: url('#{path_to_photo profpic}')"}
+                    - profpic = Photo.find(comment.user.user_info.photo_id).id.to_s
+                  %span.profile-picture{:style => "background-image: url('#{serve_photo_path profpic}')"}
                   %div
                     - user = comment.user
                     - name = user.user_info.firstname + " " + user.user_info.lastname

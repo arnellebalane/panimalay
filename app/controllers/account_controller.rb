@@ -8,10 +8,10 @@ class AccountController < ApplicationController
     @activities += @user.photos.order("created_at DESC")
     @activities.sort_by!{|act| act.created_at}
 		if @user_info.photo_id
-			@profpic = Photo.find(@user_info.photo_id).filename
-		else
-			@profpic = "default.jpg"
-		end
+      @profpic = Photo.find(@user_info.photo_id).id.to_s
+    else
+      @profpic = "0"
+    end
     
     date_start = Date.today.beginning_of_week.yesterday
     date_end = Date.today.end_of_week.yesterday
@@ -26,10 +26,10 @@ class AccountController < ApplicationController
     @activities += @user.photos.order("created_at DESC")
     @activities.sort_by!{|act| act.created_at}
 		if @user_info.photo_id
-			@profpic = Photo.find(@user_info.photo_id).filename
-		else
-			@profpic = "default.jpg"
-		end
+      @profpic = Photo.find(@user_info.photo_id).id.to_s
+    else
+      @profpic = "0"
+    end
 		render :template => "account/index"
 	end
 
@@ -37,9 +37,9 @@ class AccountController < ApplicationController
     @user = User.find(session[:user_id])
     @user_info = @user.user_info
     if @user_info.photo_id
-			@profpic = Photo.find(@user_info.photo_id).filename
+			@profpic = Photo.find(@user_info.photo_id).id.to_s
 		else
-			@profpic = "default.jpg"
+			@profpic = "0"
 		end
   end
 
@@ -72,14 +72,13 @@ class AccountController < ApplicationController
         while Photo.where(:filename => filename).count > 0
           filename = "#{Array.new(20) { myString[rand(myString.length)] }.join}.#{file_type}"
         end
-        binary = Binary.create(:data => params[:user][:profile_picture].read)
         photo = Photo.create(
           :filename => filename,
           :caption => "",
           :user_id => session[:user_id],
-          :binary_id => binary.id,
           :mime_type => params[:user][:profile_picture].content_type
         )
+        binary = Binary.create(:data => params[:user][:profile_picture].read, :photo_id => photo.id)
         @user_info[:photo_id] = photo.id
       else
         redirect_to :back, :alert => "Invalid format for profile picture!" and return
@@ -116,9 +115,9 @@ class AccountController < ApplicationController
     @user = User.find(session[:user_id]);
     @user_info = @user.user_info
     if @user_info.photo_id
-      @profpic = Photo.find(@user_info.photo_id).filename
+      @profpic = Photo.find(@user_info.photo_id).id.to_s
     else
-      @profpic = "default.jpg"
+      @profpic = "0"
     end
     @months = %W(January February March April May June July August September October November December)
   end
@@ -127,9 +126,9 @@ class AccountController < ApplicationController
     @user = User.find(session[:user_id]);
     @user_info = @user.user_info
     if @user_info.photo_id
-      @profpic = Photo.find(@user_info.photo_id).filename
+      @profpic = Photo.find(@user_info.photo_id).id.to_s
     else
-      @profpic = "default.jpg"
+      @profpic = "0"
     end
     @photos = Photo.order("created_at DESC")
   end

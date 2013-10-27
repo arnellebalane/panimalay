@@ -6,9 +6,9 @@ class BoardController < ApplicationController
 		@activities.sort_by!{|act| act.created_at}
 		@comment = Comment.new
 		if @user_info.photo_id
-			@profpic = Photo.find(@user_info.photo_id).filename
+			@profpic = Photo.find(@user_info.photo_id).id.to_s
 		else
-			@profpic = "default.jpg"
+			@profpic = "0"
 		end
 		@post = Post.new
 		@photo = Photo.new

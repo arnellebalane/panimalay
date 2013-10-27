@@ -2,6 +2,7 @@ class CreateBinaries < ActiveRecord::Migration
   def change
     create_table :binaries do |t|
       t.binary :data
+      t.integer :photo_id
 
       t.timestamps
     end

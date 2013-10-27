@@ -2,7 +2,7 @@ class CreatePhotos < ActiveRecord::Migration
   def up
     create_table :photos do |t|
       t.string :filename
-      t.text :caption
+      t.text :caption, :default => ""
       t.references :user, :null => false
       t.timestamps
     end

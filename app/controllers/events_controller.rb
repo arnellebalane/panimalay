@@ -5,9 +5,9 @@ class EventsController < ApplicationController
     @user = User.find(session[:user_id]);
     @user_info = @user.user_info
     if @user_info.photo_id
-      @profpic = Photo.find(@user_info.photo_id).filename
+      @profpic = Photo.find(@user_info.photo_id).id.to_s
     else
-      @profpic = "default.jpg"
+      @profpic = "0"
     end
     month = Date.today.month
     year = Date.today.year

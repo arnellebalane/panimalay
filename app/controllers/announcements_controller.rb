@@ -2,9 +2,9 @@ class AnnouncementsController < ApplicationController
   def index
     @user_info = UserInfo.find(session[:user_id])
     if @user_info.photo_id
-      @profpic = Photo.find(@user_info.photo_id).filename
+      @profpic = Photo.find(@user_info.photo_id).id.to_s
     else
-      @profpic = "default.jpg"
+      @profpic = "0"
     end
     @announcements = Announcement.order("created_at DESC")
 

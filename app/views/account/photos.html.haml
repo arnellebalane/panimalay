@@ -3,12 +3,12 @@
 
   .photo-gallery
     - @photos.each do |photo|
-      .photo{:style => "background-image: url('#{path_to_photo photo.filename}')", "data-owner" => photo.user_id, "data-id" => photo.id}
+      .photo{:style => "background-image: url('#{serve_photo_path photo.id}')", "data-owner" => photo.user_id, "data-id" => photo.id}
 
 #popup-modal
   #popup-overlay
   #popup.clearfix
-    #preview-section{:style => "background-image: url('#{path_to_photo "default.jpg"}')"}
+    #preview-section{:style => "background-image: url('')"}
     #info-section
       %header 
         .close

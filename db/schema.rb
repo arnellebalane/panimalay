@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20131027035056) do
 
   create_table "binaries", :force => true do |t|
     t.binary   "data"
+    t.integer  "photo_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -150,11 +151,10 @@ ActiveRecord::Schema.define(:version => 20131027035056) do
 
   create_table "photos", :force => true do |t|
     t.string   "filename"
-    t.text     "caption"
-    t.integer  "user_id",    :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "binary_id"
+    t.text     "caption",    :default => ""
+    t.integer  "user_id",                    :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.string   "mime_type"
   end
 
