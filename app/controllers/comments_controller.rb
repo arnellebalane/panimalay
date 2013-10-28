@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
 		comment = Comment.find(params[:id])
 		if comment.user.id == session[:user_id]
 			comment.destroy
-			flash[:alert] = "Comment deleted!"
+			flash[:notice] = "Comment deleted!"
 		else
 			flash[:alert] = "You cannot delete other people's comment!"
 		end

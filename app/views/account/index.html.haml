@@ -46,7 +46,7 @@
                     %footer 
                       %time= comment.created_at.strftime("%B %d, %Y at %I:%M %p")
                       - if current_user.id == comment.user.id
-                        = link_to "Delete", "#", :method => :delete
+                        = link_to "Delete", comment_path(comment.id), :method => :delete
 
               = form_for @comment, :html => {:class => "new-comment clearfix"} do |f|
                 = f.hidden_field :parent_id, :value => activity.id
