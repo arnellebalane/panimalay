@@ -42,6 +42,13 @@ class PostsController < ApplicationController
   end
 
   def destroy
-
+    post = Post.find(params[:id])
+    if post.user.id == session[:user_id]
+      post.destroy
+      flash[:notice] = "Post deleted!"
+    else
+      flash[:alert] = "You cannot delete other people's posts!"
+    end
+    redirect_to :back
   end
 end

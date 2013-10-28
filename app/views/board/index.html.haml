@@ -31,7 +31,10 @@
               %time= activity.created_at.strftime("%B %d, %Y at %I:%M %p")
               = link_to pluralize(activity.comments.length, "Comment"), "#", :class => "comment-hook"
               - if current_user.id == activity.user.id
-                = link_to "Delete", "#"
+                - if activity.class.name == "Post"
+                  = link_to "Delete", post_path(activity.id), :method=>:delete
+                - if activity.class.name == "Photo"
+                  = link_to "Delete", photo_path(activity.id), :method=>:delete
 
             .comments
               - activity.comments.each do |comment|

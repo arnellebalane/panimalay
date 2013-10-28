@@ -52,6 +52,23 @@ class PhotosController < ApplicationController
     render :json => result
   end
 
+  def destroy
+    photo = Photo.find(params[:id])
+    user = User.find(session[:user_id])
+    user_info = user.user_info
+    if photo.user.id == session[:user_id]
+      if user_info.photo_id == photo.id
+        user_info.photo_id = nil
+        user_info.save
+      end      
+      photo.destroy
+      flash[:notice] = "Photo deleted!"
+    else
+      flash[:notice] = "You cannot delete other people's photos!"
+    end
+    redirect_to :back
+  end
+
   def serve
     if params[:id] == "0"
       photo = File.open("public/photos/default.jpg").read

@@ -27,7 +27,7 @@
                       %time= event.event_date.strftime("%B %d, %Y")
                       %p= event.description
                       - if current_user.id == event.user.id
-                        = link_to "Delete", "#"
+                        = link_to "Delete", event_path(event.id), :method=>:delete
           - events = day_events.where(:event_category_id => 2)
           - if events.count > 0
             .holidays
@@ -40,7 +40,7 @@
                       %time= event.event_date.strftime("%B %d, %Y")
                       %p= event.description
                       - if current_user.id == event.user.id
-                        = link_to "Delete", "#"
+                        = link_to "Delete", event_path(event.id), :method=>:delete
           - events = day_events.where(:event_category_id => 3)
           - if events.count > 0
             .birthdays 
@@ -53,7 +53,7 @@
                       %time= event.event_date.strftime("%B %d, %Y")
                       %p= event.description
                       - if current_user.id == event.user.id
-                        = link_to "Delete", "#"
+                        = link_to "Delete", event_path(event.id), :method=>:delete
 
 #new-event-modal
   #new-event-overlay

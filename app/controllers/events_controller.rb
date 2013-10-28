@@ -45,4 +45,16 @@ class EventsController < ApplicationController
     end
     redirect_to :back
   end
+
+  def destroy
+    event = Event.find(params[:id])
+    if event.user.id == session[:user_id]
+      event.destroy
+      flash[:notice] = "Event deleted!"
+    else
+      flash[:alert] = "You cannot delete other people's events!"
+    end
+    redirect_to :back
+  end
+
 end

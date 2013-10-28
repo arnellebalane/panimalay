@@ -7,7 +7,7 @@ Panimalay::Application.routes.draw do
     get :photos, :on => :collection
     put :update, :on => :collection
   end
-  resources :photos, :only => [:create] do
+  resources :photos, :only => [:create, :destroy] do
     post :get_photo, :on => :collection
     get :serve, :on => :member
   end
@@ -17,7 +17,7 @@ Panimalay::Application.routes.draw do
   resources :comments, :only => [:create, :destroy]
   # end
   resources :announcements, :only => [:index, :create]
-  resources :events, :only => [:index, :create]
+  resources :events, :only => [:index, :create, :destroy]
 
   match "/gallery", :to => "photos#index", :as => "gallery"
 
