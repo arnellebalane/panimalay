@@ -28,7 +28,7 @@
               %time= activity.created_at.strftime("%B %d, %Y at %I:%M %p")
               = link_to pluralize(activity.comments.length, "Comment"), "#", :class => "comment-hook"
             .comments
-              - activity.comments.each do |comment|
+              - activity.comments.reverse.each do |comment|
                 .comment.clearfix
                   - profpic = "0"
                   - if comment.user.user_info.photo_id and Photo.find(comment.user.user_info.photo_id)

@@ -37,7 +37,7 @@
                   = link_to "Delete", photo_path(activity.id), :method=>:delete
 
             .comments
-              - activity.comments.each do |comment|
+              - activity.comments.reverse.each do |comment|
                 .comment.clearfix
                   - profpic = "0"
                   - if comment.user.user_info.photo_id and Photo.find(comment.user.user_info.photo_id)
