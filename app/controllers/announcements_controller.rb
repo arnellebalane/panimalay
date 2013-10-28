@@ -15,6 +15,7 @@ class AnnouncementsController < ApplicationController
       date_end = Date.today.end_of_week.yesterday
       @events = Event.where(:event_date => date_start..date_end).order("event_date")
     else
+      @announcements = Announcement.where("privacy = ?", "public").order("created_at DESC");
       render :template => "announcements/public"
     end
     @announcements = Announcement.order("created_at DESC")

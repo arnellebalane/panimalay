@@ -9,8 +9,8 @@ development:
   database: panimalay_development
   pool: 5
   timeout: 5000
-  username: arnelle
-  password: 
+  username: NewUserName
+  password: name_anad
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -21,8 +21,8 @@ test:
   database: panimalay_test
   pool: 5
   timeout: 5000
-  username: arnelle
-  password: 
+  username: NewUserName
+  password: name_anad
 
 production:
   adapter: postgresql
@@ -30,5 +30,5 @@ production:
   database: panimalay_production
   pool: 5
   timeout: 5000
-  username: arnelle
-  password: 
+  username: NewUserName
+  password: name_anad
